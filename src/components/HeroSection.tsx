@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import MagneticButton from "@/components/MagneticButton";
+import { useState, useEffect } from "react";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -17,20 +18,43 @@ const containerVariants = {
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 10 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.8,
-      ease: [0.16, 1, 0.3, 1],
+      duration: 0.5,
+      ease: "easeOut",
     } as any,
   },
 };
 
 export default function HeroSection() {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  const titleText = "I build robust mobile experiences at scale.";
+  const titleCharacters = Array.from(titleText);
+
+  if (!isMounted) {
+    return (
+      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 pt-20 pb-16 flex flex-col md:flex-row items-center gap-12">
+          <div className="flex-1 text-center md:text-left z-20">
+            <h1 className="text-5xl md:text-7xl font-bold text-navy tracking-tight leading-[1.1] mb-8">
+              {titleText}
+            </h1>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
-    <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden">
+    <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden bg-white/0">
       <motion.div 
         variants={containerVariants}
         initial="hidden"
@@ -46,11 +70,29 @@ export default function HeroSection() {
             <span>Available for new opportunities</span>
           </motion.div>
           
-          <motion.h1 variants={itemVariants} className="text-5xl md:text-7xl font-bold text-navy tracking-tight leading-[1.1] mb-8">
-            I build robust mobile experiences at scale.
+          <motion.h1 
+            initial="hidden"
+            animate="visible"
+            className="text-5xl md:text-7xl font-bold text-navy tracking-tight leading-[1.1] mb-8 flex flex-wrap mix-blend-multiply"
+          >
+            {titleCharacters.map((char, index) => (
+              <motion.span
+                key={index}
+                variants={itemVariants}
+                transition={{
+                  delay: index * 0.03, // Staggered reveal
+                }}
+              >
+                {char === " " ? "\u00A0" : char}
+              </motion.span>
+            ))}
           </motion.h1>
           
-          <motion.p variants={itemVariants} className="text-xl text-text-body mb-12 max-w-2xl leading-relaxed">
+          <motion.p 
+            variants={itemVariants} 
+            transition={{ delay: 1.0 }} // Reveal after title
+            className="text-xl text-text-body mb-12 max-w-2xl leading-relaxed"
+          >
             Hi, I&apos;m Megh. I&apos;m an Android SDK Engineer with 4 years of experience specializing in developer tools, system architecture, and performance optimization.
           </motion.p>
           

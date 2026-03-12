@@ -83,9 +83,9 @@ export default function ParticleBackground() {
         // Render with slight glow
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(0, 0, 0, ${p.alpha * 0.4})`;
+        ctx.fillStyle = `rgba(255, 255, 255, ${p.alpha})`;
         ctx.shadowBlur = 4;
-        ctx.shadowColor = "rgba(0, 0, 0, 0.1)";
+        ctx.shadowColor = "white";
         ctx.fill();
       });
 

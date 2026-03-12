@@ -17,9 +17,22 @@ export default function MagneticButton({ children, className, onClick }: Magneti
     if (!ref.current) return;
     const { clientX, clientY } = e;
     const { left, top, width, height } = ref.current.getBoundingClientRect();
-    const x = clientX - (left + width / 2);
-    const y = clientY - (top + height / 2);
-    setPosition({ x: x * 0.35, y: y * 0.35 });
+    const centerX = left + width / 2;
+    const centerY = top + height / 2;
+    const dx = clientX - centerX;
+    const dy = clientY - centerY;
+    
+    // Snapping radius of 50px
+    const distance = Math.sqrt(dx * dx + dy * dy);
+    const snapRadius = 100; // Increased feel radius for smoothness
+    
+    if (distance < snapRadius) {
+      // Snap effect: more intense movement as cursor gets closer to center
+      const power = 1 - distance / snapRadius;
+      setPosition({ x: dx * 0.5 * power, y: dy * 0.5 * power });
+    } else {
+      setPosition({ x: 0, y: 0 });
+    }
   };
 
   const handleMouseLeave = () => {

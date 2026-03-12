@@ -17,7 +17,7 @@ export default async function ProjectPage({
   }
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-transparent">
       
       <div className="pt-32 pb-24">
         <div className="max-w-7xl mx-auto px-6">

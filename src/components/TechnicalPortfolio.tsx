@@ -98,7 +98,7 @@ export default function TechnicalPortfolio() {
                   {project.tags.map((tag, tagIndex) => (
                     <span
                       key={tagIndex}
-                      className="px-3 py-1 bg-gray-50 text-gray-600 rounded-full text-xs font-medium border border-gray-100"
+                      className="px-3 py-1 bg-gray-100 text-navy rounded-full text-xs font-medium border border-gray-200"
                     >
                       {tag}
                     </span>

@@ -2,23 +2,16 @@
 
 @theme {
   --font-sans: var(--font-lexend), sans-serif;
-  --color-background-primary: #FFFFFF;
+  --color-background-primary: #FAFAFA;
   --color-background-muted: #F3F4F6;
   --color-primary: #FD853A;
-  --color-navy: #1D2939;
-  --color-text-body: #667085;
+  --color-navy: #1A1A1A;
+  --color-text-body: #666666;
 }
 
 :root {
-  --background: #FFFFFF;
-  --foreground: #1D2939;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: #FAFAFA;
+  --foreground: #1A1A1A;
 }
 
 body {

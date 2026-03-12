@@ -84,7 +84,7 @@ export default function CareerPath() {
                     </p>
                     <ul className={`space-y-2 ${index % 2 === 0 ? 'md:items-end' : 'md:items-start'}`}>
                       {exp.achievements.map((achievement, aIndex) => (
-                        <li key={aIndex} className={`flex items-start text-sm text-gray-600 ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
+                        <li key={aIndex} className={`flex items-start text-sm text-text-body ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
                           <div className={`h-1.5 w-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0 ${index % 2 === 0 ? 'md:ml-3' : 'md:mr-3'}`} />
                           <span>{achievement}</span>
                         </li>
