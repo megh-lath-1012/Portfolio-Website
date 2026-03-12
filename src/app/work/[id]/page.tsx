@@ -2,7 +2,6 @@ import { projects } from "@/data/projects";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Github, Cpu, Code2, Layers, Smartphone } from "lucide-react";
-import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 
 export default async function ProjectPage({
@@ -19,7 +18,6 @@ export default async function ProjectPage({
 
   return (
     <main className="min-h-screen bg-white">
-      <Navigation />
       
       <div className="pt-32 pb-24">
         <div className="max-w-7xl mx-auto px-6">
