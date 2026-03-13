@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import MagneticButton from "@/components/MagneticButton";
-import { Moon, Sun } from "lucide-react";
+import { Moon, Sun, FileDown } from "lucide-react";
 import { useTheme } from "@/providers/ThemeProvider";
 
 export default function Navigation() {
@@ -37,6 +37,15 @@ export default function Navigation() {
             className="text-sm font-medium text-text-body hover:text-navy transition-colors"
           >
             Contact
+          </Link>
+          
+          <Link
+            href="/Megh-Resume.pdf"
+            download
+            className="flex items-center space-x-2 text-sm font-medium text-text-body hover:text-navy transition-colors px-4 py-2 rounded-full border border-gray-100 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800"
+          >
+            <FileDown className="w-4 h-4" />
+            <span>Resume</span>
           </Link>
           
           <button

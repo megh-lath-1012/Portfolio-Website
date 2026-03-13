@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import ElasticBackground from "@/components/ElasticBackground";
@@ -40,6 +41,24 @@ export default function HeroSection() {
         className="max-w-7xl mx-auto px-6 relative z-10"
       >
         <div className="max-w-3xl">
+          <motion.div 
+            variants={itemVariants}
+            className="mb-8 relative inline-block"
+          >
+            <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-3xl overflow-hidden border-2 border-primary/20 p-1.5 bg-background shadow-xl scale-100 hover:scale-105 transition-transform duration-500">
+              <div className="relative w-full h-full rounded-2xl overflow-hidden">
+                <Image
+                  src="/profile.jpeg"
+                  alt="Megh Lath"
+                  fill
+                  className="object-cover"
+                  priority
+                />
+              </div>
+              <div className="absolute inset-0 rounded-3xl border border-primary/10 pointer-events-none" />
+            </div>
+          </motion.div>
+
           <motion.div variants={itemVariants} className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-orange-50 dark:bg-orange-900/20 border border-orange-100 dark:border-orange-900/30 text-primary text-sm font-medium mb-8">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
