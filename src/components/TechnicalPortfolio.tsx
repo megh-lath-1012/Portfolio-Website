@@ -30,7 +30,7 @@ const cardVariants = {
 
 export default function TechnicalPortfolio() {
   return (
-    <section id="work" className="py-24 bg-white">
+    <section id="work" className="py-24 bg-background transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -48,7 +48,7 @@ export default function TechnicalPortfolio() {
             </p>
           </div>
           <Link
-            href="https://github.com/meghlath"
+            href="https://github.com/megh-lath-1012"
             target="_blank"
             className="hidden md:inline-flex items-center text-primary font-semibold hover:text-orange-600 transition-colors mt-6 md:mt-0"
           >
@@ -72,10 +72,10 @@ export default function TechnicalPortfolio() {
                 scale: 1.02,
                 boxShadow: "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)"
               }}
-              className="group flex flex-col h-full bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm transition-all duration-300"
+              className="group flex flex-col h-full bg-background border border-gray-100 dark:border-gray-800 rounded-2xl overflow-hidden shadow-sm transition-all duration-300"
             >
               {/* Abstract Representation / Diagram Area */}
-              <div className={`h-48 w-full ${project.bgColor} relative p-6 flex items-center justify-center border-b border-gray-100`}>
+              <div className={`h-48 w-full ${project.bgColor} dark:bg-opacity-5 relative p-6 flex items-center justify-center border-b border-gray-100 dark:border-gray-800`}>
                 <div className="flex gap-2 opacity-60">
                      <div className="w-16 h-16 rounded shadow-sm bg-white/80 border border-gray-200"></div>
                      <div className="w-16 h-16 rounded shadow-sm bg-white/80 border border-gray-200"></div>

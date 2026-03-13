@@ -15,17 +15,17 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #0f172a;
   --navy: #0f172a;
   --primary: #f97316;
-  --text-body: #4b5563;
+  --text-body: #475569;
   --background-muted: #f8fafc;
 }
 
 .dark {
   --background: #020617;
   --foreground: #f8fafc;
-  --navy: #f8fafc;
+  --navy: #e2e8f0;
   --primary: #fb923c;
   --text-body: #94a3b8;
   --background-muted: #0f172a;

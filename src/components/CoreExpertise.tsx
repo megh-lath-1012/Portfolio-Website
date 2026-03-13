@@ -74,9 +74,9 @@ export default function CoreExpertise() {
               key={index}
               variants={cardVariants}
               whileHover={{ y: -5 }}
-              className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow group"
+              className="bg-background p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 hover:shadow-md transition-all group"
             >
-              <div className="w-14 h-14 bg-orange-50 rounded-xl flex items-center justify-center mb-8 group-hover:bg-primary transition-colors">
+              <div className="w-14 h-14 bg-orange-50 dark:bg-orange-900/20 rounded-xl flex items-center justify-center mb-8 group-hover:bg-primary transition-colors">
                 <service.icon className="w-7 h-7 text-primary group-hover:text-white transition-colors" />
               </div>
               <h3 className="text-2xl font-semibold text-navy mb-4">

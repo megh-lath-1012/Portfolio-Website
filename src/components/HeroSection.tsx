@@ -41,7 +41,7 @@ export default function HeroSection() {
         className="max-w-7xl mx-auto px-6 relative z-10"
       >
         <div className="max-w-3xl">
-          <motion.div variants={itemVariants} className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-orange-50 border border-orange-100 text-primary text-sm font-medium mb-8">
+          <motion.div variants={itemVariants} className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-orange-50 dark:bg-orange-900/20 border border-orange-100 dark:border-orange-900/30 text-primary text-sm font-medium mb-8">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
@@ -52,7 +52,7 @@ export default function HeroSection() {
           <motion.h1 
             initial="hidden"
             animate="visible"
-            className="text-5xl md:text-7xl font-bold text-navy tracking-tight leading-[1.1] mb-8 mix-blend-multiply flex flex-wrap"
+            className="text-5xl md:text-7xl font-bold text-navy tracking-tight leading-[1.1] mb-8 flex flex-wrap"
           >
             {titleCharacters.map((char, index) => (
               <motion.span
@@ -68,20 +68,6 @@ export default function HeroSection() {
                 {char === " " ? "\u00A0" : char}
               </motion.span>
             ))}
-            <motion.span
-              key="cursor"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: [1, 0, 1] }}
-              transition={{ 
-                duration: 0.8, 
-                repeat: 3, 
-                repeatDelay: 0.1,
-                delay: titleCharacters.length * 0.05 + 0.1,
-                ease: "linear",
-              }}
-              className="inline-block w-[4px] h-[0.9em] bg-primary ml-1 align-middle"
-              style={{ opacity: 0 }}
-            />
           </motion.h1>
           
           <motion.p 
@@ -119,9 +105,9 @@ export default function HeroSection() {
       {/* Decorative abstract elements */}
       <motion.div 
         initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 0.6, scale: 1 }}
+        animate={{ opacity: 0.4, scale: 1 }}
         transition={{ duration: 1.5, ease: "easeOut" }}
-        className="absolute top-1/4 right-0 -translate-y-1/2 translate-x-1/3 w-[800px] h-[800px] bg-gradient-to-tr from-orange-50 to-transparent rounded-full blur-3xl pointer-events-none" 
+        className="absolute top-1/4 right-0 -translate-y-1/2 translate-x-1/3 w-[800px] h-[800px] bg-gradient-to-tr from-orange-50 dark:from-orange-900/10 to-transparent rounded-full blur-3xl pointer-events-none" 
       />
     </section>
   );

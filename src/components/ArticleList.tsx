@@ -31,7 +31,7 @@ export default function ArticleList() {
   const displayedArticles = articles.slice(0, 6);
 
   return (
-    <section id="articles" className="py-24 bg-background-muted">
+    <section id="articles" className="py-24 bg-background-muted transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -69,7 +69,7 @@ export default function ArticleList() {
               <Link
                 href={article.link}
                 target="_blank"
-                className="group flex flex-col h-full bg-white rounded-2xl border border-gray-100 hover:border-primary/30 shadow-sm hover:shadow-xl transition-all overflow-hidden"
+                className="group flex flex-col h-full bg-background rounded-2xl border border-gray-100 dark:border-gray-800 hover:border-primary/30 shadow-sm hover:shadow-xl transition-all overflow-hidden"
               >
                 {/* Image Container */}
                 <div className="relative h-48 w-full overflow-hidden bg-gray-100">
@@ -80,12 +80,12 @@ export default function ArticleList() {
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center text-gray-400 bg-gray-50">
+                    <div className="w-full h-full flex items-center justify-center text-gray-400 bg-background-muted">
                       <BookOpen className="w-12 h-12" />
                     </div>
                   )}
                   <div className="absolute top-4 left-4">
-                    <span className="px-3 py-1 bg-white/90 backdrop-blur-sm text-primary text-xs font-bold rounded-full shadow-sm">
+                    <span className="px-3 py-1 bg-background/90 backdrop-blur-sm text-primary text-xs font-bold rounded-full shadow-sm">
                       {article.category}
                     </span>
                   </div>
@@ -109,7 +109,7 @@ export default function ArticleList() {
                     {article.excerpt}
                   </p>
                   
-                  <div className="pt-4 border-t border-gray-50 flex items-center text-primary font-bold text-sm">
+                  <div className="pt-4 border-t border-gray-100 dark:border-gray-800 flex items-center text-primary font-bold text-sm">
                     Read Article <ArrowRight className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </div>
                 </div>
@@ -122,7 +122,7 @@ export default function ArticleList() {
           <div className="mt-16 flex justify-center">
             <Link
               href="/articles"
-              className="px-10 py-4 bg-white text-navy border border-gray-200 font-bold rounded-full hover:bg-navy hover:text-white transition-all shadow-sm hover:shadow-lg flex items-center group"
+              className="px-10 py-4 bg-background text-navy border border-gray-200 dark:border-gray-800 font-bold rounded-full hover:bg-navy hover:text-white dark:hover:text-background transition-all shadow-sm hover:shadow-lg flex items-center group"
             >
               View All Articles
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />

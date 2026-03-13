@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 
 import SmoothScroll from "@/providers/SmoothScroll";
 import PageTransition from "@/providers/PageTransition";
-import ParticleBackground from "@/components/ParticleBackground";
+import VectorFieldBackground from "@/components/VectorFieldBackground";
 import Navigation from "@/components/Navigation";
 import { ThemeProvider } from "@/providers/ThemeProvider";
 
@@ -34,7 +34,7 @@ export default function RootLayout({
       <body className={`${inter.variable} ${lexend.variable} font-inter antialiased`}>
         <ThemeProvider>
           <SmoothScroll>
-            <ParticleBackground />
+            <VectorFieldBackground />
             <Navigation />
             <PageTransition>
               {children}
