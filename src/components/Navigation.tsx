@@ -40,8 +40,7 @@ export default function Navigation() {
           </Link>
           
           <Link
-            href="/Megh-Resume.pdf"
-            download
+            href="/resume"
             className="flex items-center space-x-2 text-sm font-medium text-text-body hover:text-navy transition-colors px-4 py-2 rounded-full border border-gray-100 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800"
           >
             <FileDown className="w-4 h-4" />

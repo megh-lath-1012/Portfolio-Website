@@ -45,8 +45,8 @@ export default function HeroSection() {
             variants={itemVariants}
             className="mb-8 relative inline-block"
           >
-            <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-3xl overflow-hidden border-2 border-primary/20 p-1.5 bg-background shadow-xl scale-100 hover:scale-105 transition-transform duration-500">
-              <div className="relative w-full h-full rounded-2xl overflow-hidden">
+            <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-2 border-primary/20 p-1.5 bg-background shadow-xl scale-100 hover:scale-105 transition-transform duration-500">
+              <div className="relative w-full h-full rounded-full overflow-hidden">
                 <Image
                   src="/profile.jpeg"
                   alt="Megh Lath"
@@ -55,16 +55,22 @@ export default function HeroSection() {
                   priority
                 />
               </div>
-              <div className="absolute inset-0 rounded-3xl border border-primary/10 pointer-events-none" />
+              <div className="absolute inset-0 rounded-full border border-primary/10 pointer-events-none" />
             </div>
-          </motion.div>
 
-          <motion.div variants={itemVariants} className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-orange-50 dark:bg-orange-900/20 border border-orange-100 dark:border-orange-900/30 text-primary text-sm font-medium mb-8">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-            </span>
-            <span>Available for new opportunities</span>
+            {/* Availability Badge next to image */}
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.8, duration: 0.5 }}
+              className="absolute bottom-1 -right-4 flex items-center space-x-2 px-3 py-1.5 rounded-full bg-white dark:bg-gray-900 border border-orange-100 dark:border-orange-900/30 shadow-lg text-primary text-xs font-semibold whitespace-nowrap z-20"
+            >
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+              </span>
+              <span>Available for new opportunities</span>
+            </motion.div>
           </motion.div>
           
           <motion.h1 
