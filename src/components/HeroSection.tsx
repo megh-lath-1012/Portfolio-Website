@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
-import MagneticButton from "@/components/MagneticButton";
 import ElasticBackground from "@/components/ElasticBackground";
 
 const containerVariants = {
@@ -65,25 +64,22 @@ export default function HeroSection() {
           </motion.p>
           
           <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-4">
-            <MagneticButton>
-              <Link
-                href="#work"
-                className="px-8 py-4 bg-navy text-white font-medium rounded-full hover:bg-gray-800 transition-colors flex items-center shadow-lg hover:shadow-xl w-full sm:w-auto justify-center dark:bg-primary dark:hover:bg-orange-600"
-              >
-                View My Work
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
-            </MagneticButton>
-            <MagneticButton>
-              <Link
-                href="https://github.com/megh-lath-1012"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-8 py-4 bg-background text-foreground border border-gray-300 font-medium rounded-full hover:bg-gray-100 transition-colors w-full sm:w-auto text-center block dark:bg-transparent dark:text-foreground dark:border-gray-700 dark:hover:bg-gray-800"
-              >
-                GitHub Profile
-              </Link>
-            </MagneticButton>
+            <Link
+              href="#work"
+              className="px-8 py-4 bg-navy text-white font-medium rounded-full hover:bg-gray-800 transition-colors flex items-center shadow-lg hover:shadow-xl w-full sm:w-auto justify-center dark:bg-primary dark:hover:bg-orange-600"
+            >
+              View My Work
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Link>
+            
+            <Link
+              href="https://github.com/megh-lath-1012"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-8 py-4 bg-background text-foreground border border-gray-300 font-medium rounded-full hover:bg-gray-100 hover:text-navy transition-colors w-full sm:w-auto text-center block dark:bg-transparent dark:text-foreground dark:border-gray-700 dark:hover:bg-gray-800 dark:hover:text-white"
+            >
+              GitHub Profile
+            </Link>
           </motion.div>
         </div>
       </motion.div>
