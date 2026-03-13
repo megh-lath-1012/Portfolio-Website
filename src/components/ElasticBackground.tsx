@@ -3,12 +3,16 @@
 import React, { useEffect, useRef } from "react";
 import useMousePosition from "@/hooks/useMousePosition";
 
-interface Dash {
+interface Particle {
   x: number;
   y: number;
-  baseRot: number;
-  currentRot: number;
-  rotVel: number;
+  angle: number;
+  orbitSpeed: number;
+  baseRadius: number;
+  size: number;
+  pulseSpeed: number;
+  pulseOffset: number;
+  isPrimary: boolean;
 }
 
 export default function ElasticBackground() {
@@ -28,62 +32,50 @@ export default function ElasticBackground() {
     if (!ctx) return;
 
     let animationFrameId: number;
-    let dashes: Dash[] = [];
-    const spacing = 35;
-    const maxInfluenceDist = 250;
-    const stiffness = 0.1;
-    const damping = 0.8;
-    const dashLength = 16;
-    const dashThickness = 2;
+    let particles: Particle[] = [];
+    const particleCount = 120;
+    
+    // Configurable Radii
+    const innerRadius = 80;
+    const outerRadius = 350;
 
-    const baseColorLight = [203, 213, 225]; // #cbd5e1
-    const baseColorDark = [71, 85, 105];    // #475569
-    const activeColor = [249, 115, 22];     // #f97316
+    const baseColorLight = [203, 213, 225]; // #cbd5e1 (slate-300)
+    const baseColorDark = [71, 85, 105];    // #475569 (slate-600)
+    const primaryColor = [249, 115, 22];    // #f97316 (orange-500)
 
     const resize = () => {
       const parent = canvas.parentElement;
       canvas.width = parent ? parent.clientWidth : window.innerWidth;
       canvas.height = parent ? parent.clientHeight : window.innerHeight;
-      initGrid();
-    };
-
-    const initGrid = () => {
-      dashes = [];
-      const columns = Math.ceil(canvas.width / spacing) + 4;
-      const rows = Math.ceil(canvas.height / spacing) + 4;
       
-      const startX = -((columns * spacing) / 2) + canvas.width / 2;
-      const startY = -((rows * spacing) / 2) + canvas.height / 2;
-
-      for (let x = 0; x < columns; x++) {
-        for (let y = 0; y < rows; y++) {
-          const posX = startX + x * spacing;
-          const posY = startY + y * spacing;
-
-          // Add slight jitter for organic look
-          const jitterX = (Math.random() - 0.5) * (spacing * 0.2);
-          const jitterY = (Math.random() - 0.5) * (spacing * 0.2);
-
-          const finalX = posX + jitterX;
-          const finalY = posY + jitterY;
-
-          dashes.push({
-            x: finalX,
-            y: finalY,
-            baseRot: 0,
-            currentRot: 0,
-            rotVel: 0,
-          });
-        }
+      // Only re-init if particles are empty to avoid resetting during resize
+      if (particles.length === 0) {
+        initParticles();
       }
     };
 
-    const lerpColor = (c1: number[], c2: number[], t: number) => {
-      return [
-        Math.round(c1[0] + (c2[0] - c1[0]) * t),
-        Math.round(c1[1] + (c2[1] - c1[1]) * t),
-        Math.round(c1[2] + (c2[2] - c1[2]) * t),
-      ];
+    const initParticles = () => {
+      particles = [];
+      for (let i = 0; i < particleCount; i++) {
+        const isPrimary = Math.random() > 0.85; // 15% chance to be primary color
+        
+        // Randomly distribute base radius favoring the inner/mid area slightly
+        const distRatio = Math.random();
+        // Easing distribution: pushes more particles to the middle instead of uniform
+        const radius = innerRadius + (outerRadius - innerRadius) * (Math.pow(distRatio, 0.8));
+
+        particles.push({
+          x: window.innerWidth / 2,
+          y: window.innerHeight / 2,
+          angle: Math.random() * Math.PI * 2,
+          orbitSpeed: (Math.random() - 0.5) * 0.005, // Very slow orbit
+          baseRadius: radius,
+          size: Math.random() * 2.5 + 1, // 1px to 3.5px radius
+          pulseSpeed: Math.random() * 0.02 + 0.01,
+          pulseOffset: Math.random() * Math.PI * 2,
+          isPrimary,
+        });
+      }
     };
 
     const draw = () => {
@@ -91,54 +83,60 @@ export default function ElasticBackground() {
 
       const isDark = document.documentElement.classList.contains("dark");
       const baseColor = isDark ? baseColorDark : baseColorLight;
+      const time = Date.now() * 0.001; // Current time in seconds
 
-      const mx = mouseRef.current.x;
-      const my = mouseRef.current.y;
+      // If mouse hasn't moved yet, set a subtle default center
+      const mx = mouseRef.current.x === -1000 ? canvas.width / 2 : mouseRef.current.x;
+      const my = mouseRef.current.y === -1000 ? canvas.height / 3 : mouseRef.current.y;
 
-      dashes.forEach((dash) => {
-        const dx = mx - dash.x;
-        const dy = my - dash.y;
-        const distanceToMouse = Math.sqrt(dx * dx + dy * dy);
+      particles.forEach((p) => {
+        // Orbit update
+        p.angle += p.orbitSpeed;
 
-        let targetRot = dash.baseRot;
-        let scale = 1.0;
-        let color = [...baseColor];
+        // Breathing / Pulsing effect (Zoom in out)
+        // radius flucuates by +/- 20px
+        const currentRadius = p.baseRadius + Math.sin(time * p.pulseSpeed * 50 + p.pulseOffset) * 20;
 
-        if (distanceToMouse < maxInfluenceDist) {
-          const influence = Math.pow(1 - distanceToMouse / maxInfluenceDist, 1.2);
-          const angleToMouse = Math.atan2(dy, dx);
-          
-          targetRot = angleToMouse;
-          scale = 1.0 + influence * 1.5;
-          const colorLerp = Math.min(influence * 1.5, 1.0);
-          color = lerpColor(baseColor, activeColor, colorLerp);
+        // Target position based on mouse center
+        const targetX = mx + Math.cos(p.angle) * currentRadius;
+        const targetY = my + Math.sin(p.angle) * currentRadius;
+
+        // Smooth spring follow physics towards the target
+        p.x += (targetX - p.x) * 0.05; // Lag factor (lower = smoother trail)
+        p.y += (targetY - p.y) * 0.05;
+
+        // Determine particle color and opacity
+        const color = p.isPrimary ? primaryColor : baseColor;
+        
+        // Dynamic Alpha: Fades out based on distance from mouse to create a soft edge
+        const dx = p.x - mx;
+        const dy = p.y - my;
+        const distFromCenter = Math.sqrt(dx * dx + dy * dy);
+        
+        let alpha = 0;
+        
+        // Fade out perfectly at the inner and outer boundaries
+        if (distFromCenter > innerRadius * 0.8 && distFromCenter < outerRadius * 1.2) {
+            // Normalize distance distance between 0 and 1
+            const normalizedDist = (distFromCenter - innerRadius) / (outerRadius - innerRadius);
+            
+            // Bell curve (parabola) for alpha so it's brightest in the middle of the donut
+            // Eq: 4 * x * (1 - x) peaks at 1.0 when x = 0.5
+            const bellAlpha = 4 * normalizedDist * (1 - normalizedDist);
+            
+            // Max alpha logic (subtle transparency as requested)
+            const maxAlpha = p.isPrimary ? 0.6 : (isDark ? 0.35 : 0.45);
+            alpha = Math.max(0, bellAlpha * maxAlpha);
+            
+            // Pulsing scaling effect on the individual circle radius itself
+            const pulseScale = 1 + Math.sin(time * p.pulseSpeed * 80 + p.pulseOffset) * 0.3;
+            const finalSize = Math.max(0.1, p.size * pulseScale);
+
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, finalSize, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(${color[0]}, ${color[1]}, ${color[2]}, ${alpha})`;
+            ctx.fill();
         }
-
-        // Spring physics for rotation
-        let diff = targetRot - dash.currentRot;
-        // Normalize angle difference to take shortest path
-        while (diff > Math.PI) diff -= Math.PI * 2;
-        while (diff < -Math.PI) diff += Math.PI * 2;
-
-        dash.rotVel += diff * stiffness;
-        dash.rotVel *= damping;
-        dash.currentRot += dash.rotVel;
-
-        // Draw the dash
-        ctx.save();
-        ctx.translate(dash.x, dash.y);
-        ctx.rotate(dash.currentRot);
-        
-        ctx.beginPath();
-        ctx.moveTo(-dashLength / 2 * scale, 0);
-        ctx.lineTo(dashLength / 2 * scale, 0);
-        const alpha = isDark ? 0.2 : 0.3; // Reduce opacity for subtlety
-        ctx.strokeStyle = `rgba(${color[0]}, ${color[1]}, ${color[2]}, ${alpha})`;
-        ctx.lineWidth = dashThickness * scale;
-        ctx.lineCap = "round";
-        ctx.stroke();
-        
-        ctx.restore();
       });
 
       animationFrameId = requestAnimationFrame(draw);
