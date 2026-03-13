@@ -32,7 +32,7 @@ const itemVariants = {
 export default function HeroSection() {
 
   return (
-    <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden">
+    <section className="relative pt-16 pb-20 md:pt-24 md:pb-32 overflow-hidden">
       <ElasticBackground />
       <motion.div 
         variants={containerVariants}
@@ -43,9 +43,9 @@ export default function HeroSection() {
         <div className="max-w-3xl">
           <motion.div 
             variants={itemVariants}
-            className="mb-8 relative inline-block"
+            className="mb-12 flex items-end gap-6"
           >
-            <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-2 border-primary/20 p-1.5 bg-background shadow-xl scale-100 hover:scale-105 transition-transform duration-500">
+            <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-2 border-primary/20 p-1.5 bg-background shadow-xl scale-100 hover:scale-105 transition-transform duration-500 flex-shrink-0">
               <div className="relative w-full h-full rounded-full overflow-hidden">
                 <Image
                   src="/profile.jpeg"
@@ -63,7 +63,7 @@ export default function HeroSection() {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.8, duration: 0.5 }}
-              className="absolute bottom-1 -right-4 flex items-center space-x-2 px-3 py-1.5 rounded-full bg-white dark:bg-gray-900 border border-orange-100 dark:border-orange-900/30 shadow-lg text-primary text-xs font-semibold whitespace-nowrap z-20"
+              className="flex items-center space-x-2 px-3 py-1.5 rounded-full bg-white dark:bg-gray-900 border border-orange-100 dark:border-orange-900/30 shadow-lg text-primary text-xs font-semibold whitespace-nowrap mb-2"
             >
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
