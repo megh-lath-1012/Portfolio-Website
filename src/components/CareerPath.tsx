@@ -4,36 +4,35 @@ import { motion } from "framer-motion";
 
 const experiences = [
   {
-    role: "Senior Android SDK Engineer",
-    company: "TechMobility Systems",
-    period: "2022 - Present",
-    description: "Lead developer for the Core Mobility SDK, used by 50+ enterprise clients. Focused on binary compatibility, security auditing, and automated testing frameworks.",
+    role: "Senior Mobile SDK Lead",
+    company: "Nami ML",
+    period: "05/2025 - Present",
+    description: "Directed an AI-first implementation model, governing agentic AI workflows to audit and optimize complex SDK modules across Android and iOS.",
     achievements: [
-      "Reduced SDK footprint by 35% through advanced ProGuard/R8 configurations.",
-      "Implemented a comprehensive modularization strategy using Gradle Convention Plugins.",
-      "Developed a custom CI/CD pipeline for multi-variant SDK distribution."
+      "Led the development of modular SDK architecture using Kotlin and Jetpack Compose for enterprise-scale deployments.",
+      "Oversaw platform parity between Android and iOS SDK functionalities, ensuring seamless logic synchronization.",
+      "Supervised AI-driven review cycles to resolve deep-level rendering bottlenecks, achieving fluid UI performance."
     ]
   },
   {
-    role: "Android Developer",
-    company: "DataStream Apps",
-    period: "2020 - 2022",
-    description: "Developed and maintained feature modules for a high-traffic data visualization app. Specialized in custom view components and background synchronization.",
+    role: "Mobile Application Team Leader",
+    company: "Canopas",
+    period: "01/2022 - 05/2025",
+    description: "Spearheaded a cross-functional team in developing high-performance apps using Kotlin and Flutter, while managing cross-stack refactoring.",
     achievements: [
-      "Optimized data syncing logic, reducing battery consumption by 20%.",
-      "Migrated 80% of the codebase from XML/View system to Jetpack Compose.",
-      "Integrated complex biometric authentication flows for sensitive data access."
+      "Architected automated CI/CD pipelines using Fastlane and GitHub Actions, reducing manual release efforts by 40%.",
+      "Managed full-lifecycle development using Wi-Fi P2P, Google Maps SDK, and real-time analytics to enhance user engagement.",
+      "Led technical mentorship and code reviews for a team of junior developers, ensuring adherence to modern mobile standards."
     ]
   },
   {
-    role: "Junior Mobile Engineer",
-    company: "Innovate Solutions",
-    period: "2019 - 2020",
-    description: "Assisted in the development of various client-facing Android applications. Gained deep experience in Android fundamentals and Clean Architecture.",
+    role: "Bachelor of Computer Applications",
+    company: "SRIMCA, Uka Tarsadia University",
+    period: "07/2017 - 01/2021",
+    description: "Focused on core computer science principles, software development lifecycle, and modern programming paradigms.",
     achievements: [
-      "Authored unit and UI tests for critical user flows, reaching 70% coverage.",
-      "Created a reusable networking module used across multiple client projects.",
-      "Contributed to open-source Android libraries maintained by the company."
+      "Graduated with a GPA of 9.10 / 10.0, placing in the top percentile of the cohort.",
+      "Developed several academic projects focused on database management and mobile application fundamentals."
     ]
   }
 ];
