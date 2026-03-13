@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import MagneticButton from "@/components/MagneticButton";
 
 const containerVariants = {
@@ -68,33 +68,35 @@ export default function HeroSection() {
             <span>Available for new opportunities</span>
           </motion.div>
           
-          <motion.h1 
-            variants={titleVariants}
-            initial="hidden"
-            animate="visible"
-            className="text-5xl md:text-7xl font-bold tracking-tight leading-[1.1] mb-8 flex flex-wrap"
-            style={{ color: "#F5F5F7" }}
-          >
-            {words.map((word, wordIdx) => (
-              <span key={wordIdx} className="inline-block mr-[0.25em] whitespace-nowrap">
-                {Array.from(word).map((char, charIdx) => (
-                  <motion.span
-                    key={charIdx}
-                    variants={charVariants}
-                    className="inline-block"
-                  >
-                    {char}
-                  </motion.span>
-                ))}
-              </span>
-            ))}
-          </motion.h1>
+          <AnimatePresence>
+            <motion.h1 
+              variants={titleVariants}
+              initial={false}
+              animate="visible"
+              className="text-5xl md:text-7xl font-bold tracking-tight leading-[1.1] mb-8 flex flex-wrap text-foreground dark:text-foreground"
+            >
+              {words.map((word, wordIdx) => (
+                <span key={wordIdx} className="inline-block mr-[0.25em] whitespace-nowrap">
+                  {Array.from(word).map((char, charIdx) => (
+                    <motion.span
+                      key={charIdx}
+                      initial="hidden"
+                      animate="visible"
+                      variants={charVariants}
+                      className="inline-block"
+                    >
+                      {char}
+                    </motion.span>
+                  ))}
+                </span>
+              ))}
+            </motion.h1>
+          </AnimatePresence>
           
           <motion.p 
             variants={itemVariants} 
             transition={{ delay: 1.5 }}
-            className="text-xl mb-12 max-w-2xl leading-relaxed"
-            style={{ color: "#A1A1AA" }}
+            className="text-xl mb-12 max-w-2xl leading-relaxed text-text-body"
           >
             Hi, I&apos;m Megh. I&apos;m a Mobile/Android SDK Engineer with 4 years of experience specializing in developer tools, system architecture, and performance optimization.
           </motion.p>

@@ -4,7 +4,7 @@ import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import useMousePosition from '@/hooks/useMousePosition';
 
-export default function VectorFieldBackground() {
+export default function ElasticBackground() {
   const containerRef = useRef<HTMLDivElement>(null);
   const mousePos = useMousePosition();
   const mouseRef = useRef({ x: 0, y: 0 });
@@ -37,6 +37,7 @@ export default function VectorFieldBackground() {
       alpha: true,
       powerPreference: 'high-performance' 
     });
+    renderer.setClearColor(0x000000, 0); // Explicitly ensure transparent background
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     containerRef.current.appendChild(renderer.domElement);
@@ -229,7 +230,7 @@ export default function VectorFieldBackground() {
   return (
     <div 
       ref={containerRef} 
-      className="fixed inset-0 pointer-events-none z-[-1] bg-transparent"
+      style={{ pointerEvents: 'none', position: 'fixed', inset: 0, zIndex: -1 }}
     />
   );
 }
