@@ -7,6 +7,11 @@ import useMousePosition from '@/hooks/useMousePosition';
 export default function VectorFieldBackground() {
   const containerRef = useRef<HTMLDivElement>(null);
   const mousePos = useMousePosition();
+  const mouseRef = useRef({ x: 0, y: 0 });
+
+  useEffect(() => {
+    mouseRef.current = mousePos;
+  }, [mousePos]);
   
   useEffect(() => {
     if (!containerRef.current) return;
@@ -107,14 +112,21 @@ export default function VectorFieldBackground() {
     const clock = new THREE.Clock();
     const mouseWorldPos = new THREE.Vector3();
 
+    const mouseNDC = new THREE.Vector2(-1000, -1000);
+
     const animate = () => {
       requestAnimationFrame(animate);
       
       const time = clock.getElapsedTime();
 
-      const mouseNDC = new THREE.Vector2(
-        (mousePos.x / window.innerWidth) * 2 - 1,
-        -(mousePos.y / window.innerHeight) * 2 + 1
+      // Update NDC from the hook-provided mousePos (which is stable if we don't depend on it for the effect re-run)
+      // Actually, since this effect doesn't depend on mousePos, we can just access mousePos.x/y here 
+      // but it might be stale if the closure is old. 
+      // Better way: use a ref for mouse position.
+      
+      mouseNDC.set(
+        (mouseRef.current.x / window.innerWidth) * 2 - 1,
+        -(mouseRef.current.y / window.innerHeight) * 2 + 1
       );
       
       mouseWorldPos.set(mouseNDC.x, mouseNDC.y, 0).unproject(camera);
@@ -143,9 +155,9 @@ export default function VectorFieldBackground() {
           // Check if parent has .dark class to adjust base color
           const isDark = document.documentElement.classList.contains('dark');
           if (isDark) {
-            currentColor.set('#475569'); // Darker grey for dark mode dots
+            currentColor.set('#475569'); 
           } else {
-            currentColor.set('#cbd5e1'); // Lighter grey for light mode dots
+            currentColor.set('#cbd5e1'); 
           }
 
           if (distanceToMouse < maxInfluenceDist && distanceToMouse > 0) {
@@ -158,8 +170,8 @@ export default function VectorFieldBackground() {
             currentColor.lerp(activeColor, Math.min(influence * 1.5, 1.0));
           }
 
-          const stiffness = 0.15; 
-          const damping = 0.85;   
+          const stiffness = 0.1; 
+          const damping = 0.8;   
           
           let diff = targetRotation - dashCurrentRotations[idx];
           while (diff > Math.PI) diff -= Math.PI * 2;
@@ -212,7 +224,7 @@ export default function VectorFieldBackground() {
       material.dispose();
       renderer.dispose();
     };
-  }, [mousePos]); 
+  }, []); 
 
   return (
     <div 

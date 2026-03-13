@@ -10,7 +10,7 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.15,
+      staggerChildren: 0.2,
       delayChildren: 0.3,
     },
   },
@@ -28,9 +28,28 @@ const itemVariants = {
   },
 };
 
+const titleVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.02,
+    },
+  },
+};
+
+const charVariants = {
+  hidden: { opacity: 0, y: 10 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.3, ease: "easeOut" as any },
+  },
+};
+
 export default function HeroSection() {
   const titleText = "I build robust mobile experiences at scale.";
-  const titleCharacters = Array.from(titleText);
+  const words = titleText.split(" ");
 
   return (
     <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden">
@@ -50,30 +69,32 @@ export default function HeroSection() {
           </motion.div>
           
           <motion.h1 
+            variants={titleVariants}
             initial="hidden"
             animate="visible"
-            className="text-5xl md:text-7xl font-bold text-navy tracking-tight leading-[1.1] mb-8 flex flex-wrap"
+            className="text-5xl md:text-7xl font-bold tracking-tight leading-[1.1] mb-8 flex flex-wrap"
+            style={{ color: "#F5F5F7" }}
           >
-            {titleCharacters.map((char, index) => (
-              <motion.span
-                key={index}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{
-                  duration: 0.05,
-                  delay: index * 0.05,
-                  ease: "easeInOut",
-                }}
-              >
-                {char === " " ? "\u00A0" : char}
-              </motion.span>
+            {words.map((word, wordIdx) => (
+              <span key={wordIdx} className="inline-block mr-[0.25em] whitespace-nowrap">
+                {Array.from(word).map((char, charIdx) => (
+                  <motion.span
+                    key={charIdx}
+                    variants={charVariants}
+                    className="inline-block"
+                  >
+                    {char}
+                  </motion.span>
+                ))}
+              </span>
             ))}
           </motion.h1>
           
           <motion.p 
             variants={itemVariants} 
-            transition={{ delay: 1.0 }} // Reveal after title
-            className="text-xl text-text-body mb-12 max-w-2xl leading-relaxed"
+            transition={{ delay: 1.5 }}
+            className="text-xl mb-12 max-w-2xl leading-relaxed"
+            style={{ color: "#A1A1AA" }}
           >
             Hi, I&apos;m Megh. I&apos;m a Mobile/Android SDK Engineer with 4 years of experience specializing in developer tools, system architecture, and performance optimization.
           </motion.p>
@@ -82,7 +103,7 @@ export default function HeroSection() {
             <MagneticButton>
               <Link
                 href="#work"
-                className="px-8 py-4 bg-navy text-white font-medium rounded-full hover:bg-gray-800 transition-colors flex items-center shadow-lg hover:shadow-xl w-full sm:w-auto justify-center"
+                className="px-8 py-4 bg-navy text-white font-medium rounded-full hover:bg-gray-800 transition-colors flex items-center shadow-lg hover:shadow-xl w-full sm:w-auto justify-center dark:bg-primary dark:hover:bg-orange-600"
               >
                 View My Work
                 <ArrowRight className="ml-2 h-5 w-5" />
@@ -93,7 +114,7 @@ export default function HeroSection() {
                 href="https://github.com/megh-lath-1012"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-8 py-4 bg-white text-navy border border-gray-200 font-medium rounded-full hover:bg-gray-50 transition-colors w-full sm:w-auto text-center block"
+                className="px-8 py-4 bg-white text-navy border border-gray-200 font-medium rounded-full hover:bg-gray-50 transition-colors w-full sm:w-auto text-center block dark:bg-transparent dark:text-white dark:border-white/20 dark:hover:bg-white/5"
               >
                 GitHub Profile
               </Link>
