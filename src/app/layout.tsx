@@ -34,7 +34,6 @@ export default function RootLayout({
       <body className={`${inter.variable} ${lexend.variable} font-inter antialiased`}>
         <ThemeProvider>
           <SmoothScroll>
-            <ElasticBackground />
             <Navigation />
             <PageTransition>
               {children}

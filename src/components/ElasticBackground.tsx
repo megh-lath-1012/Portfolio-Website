@@ -41,8 +41,9 @@ export default function ElasticBackground() {
     const activeColor = [249, 115, 22];     // #f97316
 
     const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      const parent = canvas.parentElement;
+      canvas.width = parent ? parent.clientWidth : window.innerWidth;
+      canvas.height = parent ? parent.clientHeight : window.innerHeight;
       initGrid();
     };
 
@@ -131,7 +132,8 @@ export default function ElasticBackground() {
         ctx.beginPath();
         ctx.moveTo(-dashLength / 2 * scale, 0);
         ctx.lineTo(dashLength / 2 * scale, 0);
-        ctx.strokeStyle = `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
+        const alpha = isDark ? 0.2 : 0.3; // Reduce opacity for subtlety
+        ctx.strokeStyle = `rgba(${color[0]}, ${color[1]}, ${color[2]}, ${alpha})`;
         ctx.lineWidth = dashThickness * scale;
         ctx.lineCap = "round";
         ctx.stroke();
@@ -157,9 +159,10 @@ export default function ElasticBackground() {
       ref={canvasRef}
       style={{
         pointerEvents: "none",
-        position: "fixed",
-        inset: 0,
-        zIndex: -1,
+        position: "absolute",
+        top: 0,
+        left: 0,
+        zIndex: 0,
         background: "transparent",
       }}
     />

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import MagneticButton from "@/components/MagneticButton";
+import ElasticBackground from "@/components/ElasticBackground";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -32,6 +33,7 @@ export default function HeroSection() {
 
   return (
     <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden">
+      <ElasticBackground />
       <motion.div 
         variants={containerVariants}
         initial="hidden"
@@ -77,7 +79,7 @@ export default function HeroSection() {
                 href="https://github.com/megh-lath-1012"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-8 py-4 bg-white text-navy border border-gray-200 font-medium rounded-full hover:bg-gray-50 transition-colors w-full sm:w-auto text-center block dark:bg-transparent dark:text-white dark:border-white/20 dark:hover:bg-white/5"
+                className="px-8 py-4 bg-background text-foreground border border-gray-300 font-medium rounded-full hover:bg-gray-100 transition-colors w-full sm:w-auto text-center block dark:bg-transparent dark:text-foreground dark:border-gray-700 dark:hover:bg-gray-800"
               >
                 GitHub Profile
               </Link>
