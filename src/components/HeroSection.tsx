@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import MagneticButton from "@/components/MagneticButton";
 
 const containerVariants = {
@@ -28,28 +28,7 @@ const itemVariants = {
   },
 };
 
-const titleVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.02,
-    },
-  },
-};
-
-const charVariants = {
-  hidden: { opacity: 0, y: 10 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.3, ease: "easeOut" as any },
-  },
-};
-
 export default function HeroSection() {
-  const titleText = "I build robust mobile experiences at scale.";
-  const words = titleText.split(" ");
 
   return (
     <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden">
@@ -68,30 +47,12 @@ export default function HeroSection() {
             <span>Available for new opportunities</span>
           </motion.div>
           
-          <AnimatePresence>
-            <motion.h1 
-              variants={titleVariants}
-              initial={false}
-              animate="visible"
-              className="text-5xl md:text-7xl font-bold tracking-tight leading-[1.1] mb-8 flex flex-wrap text-foreground dark:text-foreground"
-            >
-              {words.map((word, wordIdx) => (
-                <span key={wordIdx} className="inline-block mr-[0.25em] whitespace-nowrap">
-                  {Array.from(word).map((char, charIdx) => (
-                    <motion.span
-                      key={charIdx}
-                      initial="hidden"
-                      animate="visible"
-                      variants={charVariants}
-                      className="inline-block"
-                    >
-                      {char}
-                    </motion.span>
-                  ))}
-                </span>
-              ))}
-            </motion.h1>
-          </AnimatePresence>
+          <motion.h1 
+            variants={itemVariants}
+            className="text-5xl md:text-7xl font-bold tracking-tight leading-[1.1] mb-8 text-foreground dark:text-foreground"
+          >
+            I build robust mobile experiences at scale.
+          </motion.h1>
           
           <motion.p 
             variants={itemVariants} 
