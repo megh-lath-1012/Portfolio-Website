@@ -5,18 +5,18 @@ import { motion } from "framer-motion";
 
 const services = [
   {
-    title: "SDK Architecture & Design",
-    description: "Designing clean, intuitive API surfaces for reliable and scalable Android library consumption.",
+    title: "Mobile SDK Architecture",
+    description: "Designing clean, intuitive API surfaces and bridges for cross-platform (Flutter/RN) and native Android libraries.",
     icon: LayoutTemplate,
   },
   {
-    title: "Developer Experience (DX)",
-    description: "Creating comprehensive documentation, sample apps, and streamlined integration flows for external developers.",
+    title: "Full-Stack Business Systems",
+    description: "Engineering end-to-end solutions for local businesses, from real-time booking engines to complex financial ledgers.",
     icon: Code2,
   },
   {
-    title: "Performance Optimization",
-    description: "Deep dive into Android core vitals, memory management, and multi-threading for battery-efficient libraries.",
+    title: "Performance & Data Integrity",
+    description: "Deep dive into memory management and ACID-compliant local storage to ensure 100% data accuracy in flaky network conditions.",
     icon: Cpu,
   },
 ];
@@ -45,7 +45,7 @@ const cardVariants = {
 
 export default function CoreExpertise() {
   return (
-    <section id="expertise" className="py-24 bg-background-muted overflow-hidden">
+    <section id="expertise" className="py-24 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div 
           initial={{ opacity: 0, x: -20 }}
@@ -74,9 +74,9 @@ export default function CoreExpertise() {
               key={index}
               variants={cardVariants}
               whileHover={{ y: -5 }}
-              className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow group"
+              className="bg-background p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 hover:shadow-md transition-all group"
             >
-              <div className="w-14 h-14 bg-orange-50 rounded-xl flex items-center justify-center mb-8 group-hover:bg-primary transition-colors">
+              <div className="w-14 h-14 bg-orange-50 dark:bg-orange-900/20 rounded-xl flex items-center justify-center mb-8 group-hover:bg-primary transition-colors">
                 <service.icon className="w-7 h-7 text-primary group-hover:text-white transition-colors" />
               </div>
               <h3 className="text-2xl font-semibold text-navy mb-4">

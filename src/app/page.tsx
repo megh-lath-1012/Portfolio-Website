@@ -1,4 +1,3 @@
-import Navigation from "@/components/Navigation";
 import HeroSection from "@/components/HeroSection";
 import CoreExpertise from "@/components/CoreExpertise";
 import TechnicalPortfolio from "@/components/TechnicalPortfolio";
@@ -8,8 +7,7 @@ import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-background-primary selection:bg-orange-200 selection:text-navy">
-      <Navigation />
+    <main className="min-h-screen selection:bg-orange-200 selection:text-navy">
       <HeroSection />
       <CoreExpertise />
       <TechnicalPortfolio />
