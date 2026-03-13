@@ -1,7 +1,6 @@
 @import "tailwindcss";
 
 @theme {
-@theme {
   --font-lexend: var(--font-lexend);
   --font-inter: var(--font-inter);
   --color-background: var(--background);
@@ -30,7 +29,6 @@
   --primary: #fb923c;
   --text-body: #94a3b8;
   --background-muted: #0f172a;
-}
 }
 
 body {
