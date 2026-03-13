@@ -31,7 +31,7 @@ export default function ArticleList() {
   const displayedArticles = articles.slice(0, 6);
 
   return (
-    <section id="articles" className="py-24 bg-background-muted transition-colors duration-300">
+    <section id="articles" className="py-24 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}

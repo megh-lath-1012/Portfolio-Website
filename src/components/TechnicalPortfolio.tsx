@@ -30,7 +30,7 @@ const cardVariants = {
 
 export default function TechnicalPortfolio() {
   return (
-    <section id="work" className="py-24 bg-background transition-colors duration-300">
+    <section id="work" className="py-24 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
