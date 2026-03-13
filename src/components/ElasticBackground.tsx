@@ -1,236 +1,167 @@
 "use client";
 
-import React, { useEffect, useRef } from 'react';
-import * as THREE from 'three';
-import useMousePosition from '@/hooks/useMousePosition';
+import React, { useEffect, useRef } from "react";
+import useMousePosition from "@/hooks/useMousePosition";
+
+interface Dash {
+  x: number;
+  y: number;
+  baseRot: number;
+  currentRot: number;
+  rotVel: number;
+}
 
 export default function ElasticBackground() {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   const mousePos = useMousePosition();
-  const mouseRef = useRef({ x: 0, y: 0 });
+  const mouseRef = useRef({ x: -1000, y: -1000 });
 
   useEffect(() => {
     mouseRef.current = mousePos;
   }, [mousePos]);
-  
+
   useEffect(() => {
-    if (!containerRef.current) return;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
 
-    // --- 1. Scene Setup ---
-    const scene = new THREE.Scene();
-    
-    // Orthographic camera for a 2D-like perspective
-    const frustumSize = 1000;
-    const aspect = window.innerWidth / window.innerHeight;
-    const camera = new THREE.OrthographicCamera(
-      -frustumSize * aspect / 2,
-      frustumSize * aspect / 2,
-      frustumSize / 2,
-      -frustumSize / 2,
-      0.1,
-      1000
-    );
-    camera.position.z = 5;
+    const ctx = canvas.getContext("2d", { alpha: true });
+    if (!ctx) return;
 
-    const renderer = new THREE.WebGLRenderer({ 
-      antialias: true, 
-      alpha: true,
-      powerPreference: 'high-performance' 
-    });
-    renderer.setClearColor(0x000000, 0); // Explicitly ensure transparent background
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    containerRef.current.appendChild(renderer.domElement);
-
-    // --- 2. Create the Grid using InstancedMesh ---
+    let animationFrameId: number;
+    let dashes: Dash[] = [];
+    const spacing = 35;
+    const maxInfluenceDist = 250;
+    const stiffness = 0.1;
+    const damping = 0.8;
     const dashLength = 16;
-    const dashThickness = 1.2; 
-    const geometry = new THREE.PlaneGeometry(dashThickness, dashLength);
+    const dashThickness = 2;
 
-    const material = new THREE.MeshBasicMaterial({ 
-      color: new THREE.Color('#ffffff'), 
-      transparent: true,
-      opacity: 0.8, 
-      depthWrite: false
-    });
+    const baseColorLight = [203, 213, 225]; // #cbd5e1
+    const baseColorDark = [71, 85, 105];    // #475569
+    const activeColor = [249, 115, 22];     // #f97316
 
-    const spacing = 35; 
-    const columns = Math.ceil(window.innerWidth / spacing) + 4; 
-    const rows = Math.ceil(window.innerHeight / spacing) + 4;
-    const count = columns * rows;
+    const resize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      initGrid();
+    };
 
-    const instancedMesh = new THREE.InstancedMesh(geometry, material, count);
-    
-    const dummy = new THREE.Object3D();
-    const dashPositions = new Float32Array(count * 3);
-    const dashBaseOrientations = new Float32Array(count); 
-    const dashCurrentRotations = new Float32Array(count); 
-    const dashRotationVelocities = new Float32Array(count); 
-    
-    const colors = new Float32Array(count * 3);
-    const baseColor = new THREE.Color('#94a3b8'); // Slightly darker for light mode, light for dark
-    const activeColor = new THREE.Color('#f97316'); // Primary orange
-    const currentColor = new THREE.Color(); 
-
-    let i = 0;
-    const startX = -((columns * spacing) / 2);
-    const startY = -((rows * spacing) / 2);
-
-    for (let x = 0; x < columns; x++) {
-      for (let y = 0; y < rows; y++) {
-        const posX = startX + x * spacing;
-        const posY = startY + y * spacing;
-        
-        const jitterX = (Math.random() - 0.5) * (spacing * 0.2);
-        const jitterY = (Math.random() - 0.5) * (spacing * 0.2);
-        
-        const finalX = posX + jitterX;
-        const finalY = posY + jitterY;
-
-        dashPositions[i * 3] = finalX;
-        dashPositions[i * 3 + 1] = finalY;
-        dashPositions[i * 3 + 2] = 0;
-        
-        const initialRot = Math.random() * Math.PI * 2;
-        dashBaseOrientations[i] = initialRot;
-        dashCurrentRotations[i] = initialRot;
-        dashRotationVelocities[i] = 0;
-
-        dummy.position.set(finalX, finalY, 0);
-        dummy.updateMatrix();
-        instancedMesh.setMatrixAt(i, dummy.matrix);
-        
-        baseColor.toArray(colors, i * 3);
-
-        i++;
-      }
-    }
-    
-    instancedMesh.instanceColor = new THREE.InstancedBufferAttribute(colors, 3);
-    scene.add(instancedMesh);
-
-    // --- 3. Animation Loop ---
-    const clock = new THREE.Clock();
-    const mouseWorldPos = new THREE.Vector3();
-
-    const mouseNDC = new THREE.Vector2(-1000, -1000);
-
-    const animate = () => {
-      requestAnimationFrame(animate);
+    const initGrid = () => {
+      dashes = [];
+      const columns = Math.ceil(canvas.width / spacing) + 4;
+      const rows = Math.ceil(canvas.height / spacing) + 4;
       
-      const time = clock.getElapsedTime();
+      const startX = -((columns * spacing) / 2) + canvas.width / 2;
+      const startY = -((rows * spacing) / 2) + canvas.height / 2;
 
-      // Update NDC from the hook-provided mousePos (which is stable if we don't depend on it for the effect re-run)
-      // Actually, since this effect doesn't depend on mousePos, we can just access mousePos.x/y here 
-      // but it might be stale if the closure is old. 
-      // Better way: use a ref for mouse position.
-      
-      mouseNDC.set(
-        (mouseRef.current.x / window.innerWidth) * 2 - 1,
-        -(mouseRef.current.y / window.innerHeight) * 2 + 1
-      );
-      
-      mouseWorldPos.set(mouseNDC.x, mouseNDC.y, 0).unproject(camera);
-
-      let idx = 0;
       for (let x = 0; x < columns; x++) {
         for (let y = 0; y < rows; y++) {
-          
-          const posX = dashPositions[idx * 3];
-          const posY = dashPositions[idx * 3 + 1];
-          
-          const dx = mouseWorldPos.x - posX;
-          const dy = mouseWorldPos.y - posY;
-          const distanceToMouse = Math.sqrt(dx * dx + dy * dy);
-          
-          const maxInfluenceDist = 250; 
-          
-          const driftAngle = Math.PI / 4 + (Math.sin(time * 0.2 + posX * 0.01 + posY * 0.01) * 0.1);
-          const baseRotation = dashBaseOrientations[idx] * 0.1 + driftAngle; 
-          
-          let targetRotation = baseRotation;
-          let scaleY = 1.0;
-          let thickness = 1.0; 
-          currentColor.copy(baseColor);
-          
-          // Check if parent has .dark class to adjust base color
-          const isDark = document.documentElement.classList.contains('dark');
-          if (isDark) {
-            currentColor.set('#475569'); 
-          } else {
-            currentColor.set('#cbd5e1'); 
-          }
+          const posX = startX + x * spacing;
+          const posY = startY + y * spacing;
 
-          if (distanceToMouse < maxInfluenceDist && distanceToMouse > 0) {
-            const influence = Math.pow(1 - (distanceToMouse / maxInfluenceDist), 1.2);
-            const angleToMouse = Math.atan2(dy, dx) + Math.PI / 2;
-            
-            targetRotation = angleToMouse;
-            thickness = 1.0 + (influence * 1.5); 
-            scaleY = 1.0 + (influence * 0.3);
-            currentColor.lerp(activeColor, Math.min(influence * 1.5, 1.0));
-          }
+          // Add slight jitter for organic look
+          const jitterX = (Math.random() - 0.5) * (spacing * 0.2);
+          const jitterY = (Math.random() - 0.5) * (spacing * 0.2);
 
-          const stiffness = 0.1; 
-          const damping = 0.8;   
-          
-          let diff = targetRotation - dashCurrentRotations[idx];
-          while (diff > Math.PI) diff -= Math.PI * 2;
-          while (diff < -Math.PI) diff += Math.PI * 2;
-          
-          dashRotationVelocities[idx] += diff * stiffness;
-          dashRotationVelocities[idx] *= damping;
-          dashCurrentRotations[idx] += dashRotationVelocities[idx];
+          const finalX = posX + jitterX;
+          const finalY = posY + jitterY;
 
-          dummy.position.set(posX, posY, 0);
-          dummy.rotation.set(0, 0, dashCurrentRotations[idx]);
-          dummy.scale.set(thickness, scaleY, 1);
-          dummy.updateMatrix();
-          
-          instancedMesh.setMatrixAt(idx, dummy.matrix);
-          currentColor.toArray(colors, idx * 3);
-
-          idx++;
+          dashes.push({
+            x: finalX,
+            y: finalY,
+            baseRot: 0,
+            currentRot: 0,
+            rotVel: 0,
+          });
         }
       }
-
-      instancedMesh.instanceMatrix.needsUpdate = true;
-      if (instancedMesh.instanceColor) {
-        instancedMesh.instanceColor.needsUpdate = true;
-      }
-
-      renderer.render(scene, camera);
     };
 
-    animate();
-
-    const handleResize = () => {
-      const aspect = window.innerWidth / window.innerHeight;
-      camera.left = -frustumSize * aspect / 2;
-      camera.right = frustumSize * aspect / 2;
-      camera.top = frustumSize / 2;
-      camera.bottom = -frustumSize / 2;
-      camera.updateProjectionMatrix();
-
-      renderer.setSize(window.innerWidth, window.innerHeight);
+    const lerpColor = (c1: number[], c2: number[], t: number) => {
+      return [
+        Math.round(c1[0] + (c2[0] - c1[0]) * t),
+        Math.round(c1[1] + (c2[1] - c1[1]) * t),
+        Math.round(c1[2] + (c2[2] - c1[2]) * t),
+      ];
     };
-    window.addEventListener('resize', handleResize);
+
+    const draw = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      const isDark = document.documentElement.classList.contains("dark");
+      const baseColor = isDark ? baseColorDark : baseColorLight;
+
+      const mx = mouseRef.current.x;
+      const my = mouseRef.current.y;
+
+      dashes.forEach((dash) => {
+        const dx = mx - dash.x;
+        const dy = my - dash.y;
+        const distanceToMouse = Math.sqrt(dx * dx + dy * dy);
+
+        let targetRot = dash.baseRot;
+        let scale = 1.0;
+        let color = [...baseColor];
+
+        if (distanceToMouse < maxInfluenceDist) {
+          const influence = Math.pow(1 - distanceToMouse / maxInfluenceDist, 1.2);
+          const angleToMouse = Math.atan2(dy, dx);
+          
+          targetRot = angleToMouse;
+          scale = 1.0 + influence * 1.5;
+          const colorLerp = Math.min(influence * 1.5, 1.0);
+          color = lerpColor(baseColor, activeColor, colorLerp);
+        }
+
+        // Spring physics for rotation
+        let diff = targetRot - dash.currentRot;
+        // Normalize angle difference to take shortest path
+        while (diff > Math.PI) diff -= Math.PI * 2;
+        while (diff < -Math.PI) diff += Math.PI * 2;
+
+        dash.rotVel += diff * stiffness;
+        dash.rotVel *= damping;
+        dash.currentRot += dash.rotVel;
+
+        // Draw the dash
+        ctx.save();
+        ctx.translate(dash.x, dash.y);
+        ctx.rotate(dash.currentRot);
+        
+        ctx.beginPath();
+        ctx.moveTo(-dashLength / 2 * scale, 0);
+        ctx.lineTo(dashLength / 2 * scale, 0);
+        ctx.strokeStyle = `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
+        ctx.lineWidth = dashThickness * scale;
+        ctx.lineCap = "round";
+        ctx.stroke();
+        
+        ctx.restore();
+      });
+
+      animationFrameId = requestAnimationFrame(draw);
+    };
+
+    window.addEventListener("resize", resize);
+    resize();
+    draw();
 
     return () => {
-      window.removeEventListener('resize', handleResize);
-      if (containerRef.current && renderer.domElement) {
-        containerRef.current.removeChild(renderer.domElement);
-      }
-      geometry.dispose();
-      material.dispose();
-      renderer.dispose();
+      cancelAnimationFrame(animationFrameId);
+      window.removeEventListener("resize", resize);
     };
-  }, []); 
+  }, []);
 
   return (
-    <div 
-      ref={containerRef} 
-      style={{ pointerEvents: 'none', position: 'fixed', inset: 0, zIndex: -1 }}
+    <canvas
+      ref={canvasRef}
+      style={{
+        pointerEvents: "none",
+        position: "fixed",
+        inset: 0,
+        zIndex: -1,
+        background: "transparent",
+      }}
     />
   );
 }
