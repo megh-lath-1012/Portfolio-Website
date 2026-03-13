@@ -23,6 +23,7 @@ export interface Project {
   };
   keyFeatures: string[];
   technicalChallenges?: TechnicalChallenge[];
+  image?: string;
 }
 
 export const projects: Project[] = [
@@ -35,6 +36,7 @@ export const projects: Project[] = [
     tags: ["React", "Firebase", "Twilio", "Tailwind"],
     githubRepo: "megh-lath-1012/Appointmentbookingapp",
     bgColor: "bg-rose-50",
+    image: "/projects/petpalace.png",
     techSpecs: {
       language: "TypeScript",
       architecture: "Serverless / Multi-tenant",
@@ -99,6 +101,7 @@ export const projects: Project[] = [
     tags: ["Flutter", "Riverpod", "Firebase", "Cloud Functions"],
     githubRepo: "megh-lath-1012/Outstanding-Manager",
     bgColor: "bg-amber-50",
+    image: "/projects/manager.png",
     techSpecs: {
       language: "Dart",
       architecture: "Repository Pattern / Clean UI",
@@ -166,6 +169,7 @@ await batch.commit();`
     tags: ["Kotlin", "Android SDK", "Native Modules", "Cross-platform Bridges"],
     githubRepo: "namiml",
     bgColor: "bg-blue-50",
+    image: "/projects/namisdk.png",
     techSpecs: {
       language: "Kotlin",
       architecture: "Native SDK Modules",
@@ -188,6 +192,7 @@ await batch.commit();`
     tags: ["Flutter", "Jetpack Compose", "MixPanel", "A/B Testing"],
     githubRepo: "canopas/justly",
     bgColor: "bg-emerald-50",
+    image: "/projects/justly.png",
     techSpecs: {
       language: "Dart/Kotlin",
       architecture: "Clean Architecture",
@@ -210,6 +215,7 @@ await batch.commit();`
     tags: ["Google Maps SDK", "Firebase", "Firestore", "Geofencing"],
     githubRepo: "canopas/grouptrack",
     bgColor: "bg-indigo-50",
+    image: "/projects/grouptrack.png",
     techSpecs: {
       language: "Kotlin",
       architecture: "Reactive / Real-time",
@@ -232,6 +238,7 @@ await batch.commit();`
     tags: ["Android Native", "Background Tasks", "Play Store Compliance"],
     githubRepo: "canopas/triple-os",
     bgColor: "bg-red-50",
+    image: "/projects/tripleos.png",
     techSpecs: {
       language: "Java/Kotlin",
       architecture: "Legacy Refactor",
@@ -254,6 +261,7 @@ await batch.commit();`
     tags: ["Jetpack Compose", "Open Source", "UI/UX", "Kotlin"],
     githubRepo: "canopas/rich-editor-compose",
     bgColor: "bg-purple-50",
+    image: "/projects/richeditor.png",
     techSpecs: {
       language: "Kotlin",
       architecture: "Declarative UI",

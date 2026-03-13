@@ -75,12 +75,21 @@ export default function TechnicalPortfolio() {
               className="group flex flex-col h-full bg-background border border-gray-100 dark:border-gray-800 rounded-2xl overflow-hidden shadow-sm transition-all duration-300"
             >
               {/* Abstract Representation / Diagram Area */}
-              <div className={`h-48 w-full ${project.bgColor} dark:bg-opacity-5 relative p-6 flex items-center justify-center border-b border-gray-100 dark:border-gray-800`}>
-                <div className="flex gap-2 opacity-60">
-                     <div className="w-16 h-16 rounded shadow-sm bg-white/80 border border-gray-200"></div>
-                     <div className="w-16 h-16 rounded shadow-sm bg-white/80 border border-gray-200"></div>
-                     <div className="w-16 h-16 rounded shadow-sm bg-white/80 border border-gray-200"></div>
-                </div>
+              <div className={`h-48 w-full ${project.bgColor} dark:bg-opacity-5 relative overflow-hidden border-b border-gray-100 dark:border-gray-800`}>
+                {project.image ? (
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    className="object-cover group-hover:scale-110 transition-transform duration-700"
+                  />
+                ) : (
+                  <div className="flex gap-2 opacity-60 items-center justify-center h-full">
+                    <div className="w-16 h-16 rounded shadow-sm bg-white/80 border border-gray-200"></div>
+                    <div className="w-16 h-16 rounded shadow-sm bg-white/80 border border-gray-200"></div>
+                    <div className="w-16 h-16 rounded shadow-sm bg-white/80 border border-gray-200"></div>
+                  </div>
+                )}
               </div>
 
               <div className="p-8 flex flex-col flex-grow">

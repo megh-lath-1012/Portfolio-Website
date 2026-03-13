@@ -3,6 +3,7 @@
 import { motion, Variants } from "framer-motion";
 import { ArrowUpRight, ExternalLink } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 const workedProjects = [
   {
@@ -10,28 +11,32 @@ const workedProjects = [
     description: "Transitioned this premium habit-tracker from Native to Flutter, boosting performance by 30% and user engagement by 25%.",
     link: "https://justly.life/",
     tags: ["Flutter", "Analytics", "Scaling"],
-    color: "emerald"
+    color: "emerald",
+    image: "/projects/justly.png"
   },
   {
     title: "Triple O's",
     description: "Refined background task processing and resolved Play Store compliance issues for a major burger chain's ordering app.",
     link: "https://www.tripleos.com/",
     tags: ["Native Android", "Bug Fixes", "QSR"],
-    color: "red"
+    color: "red",
+    image: "/projects/tripleos.png"
   },
   {
     title: "GroupTrack",
     description: "Architected a high-precision location tracking engine using Google Maps SDK and Firestore for real-time group safety.",
     link: "https://grouptrack.canopas.com/",
     tags: ["Maps SDK", "Real-time", "Safety"],
-    color: "indigo"
+    color: "indigo",
+    image: "/projects/grouptrack.png"
   },
   {
     title: "Rich Editor",
     description: "An open-source Jetpack Compose WYSIWYG editor library focusing on cross-stack UX parity and performant text processing.",
     link: "https://github.com/canopas/rich-editor-compose",
     tags: ["Open Source", "Compose", "Kotlin"],
-    color: "purple"
+    color: "purple",
+    image: "/projects/richeditor.png"
   }
 ];
 
@@ -87,15 +92,27 @@ export default function WorkedProjects() {
               key={index}
               variants={itemVariants}
               whileHover={{ y: -8 }}
-              className="bg-background dark:bg-gray-900 border border-gray-100 dark:border-gray-800 p-8 rounded-3xl shadow-sm hover:shadow-xl transition-all group"
+              className="group bg-background dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-3xl shadow-sm hover:shadow-xl transition-all overflow-hidden flex flex-col h-full"
             >
-              <div className={`w-12 h-12 rounded-2xl bg-${project.color}-50 dark:bg-${project.color}-900/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
-                <div className={`w-2 h-2 rounded-full bg-${project.color}-500`} />
+              {/* Project Image Header */}
+              <div className="relative h-44 w-full overflow-hidden">
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  fill
+                  className="object-cover group-hover:scale-110 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
               </div>
-              
-              <h3 className="text-xl font-bold text-navy mb-3">
-                {project.title}
-              </h3>
+
+              <div className="p-8 flex flex-col flex-grow">
+                <div className={`w-12 h-12 rounded-2xl bg-${project.color}-50 dark:bg-${project.color}-900/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
+                  <div className={`w-2 h-2 rounded-full bg-${project.color}-500`} />
+                </div>
+                
+                <h3 className="text-xl font-bold text-navy mb-3">
+                  {project.title}
+                </h3>
               
               <p className="text-text-body text-sm leading-relaxed mb-6 line-clamp-3">
                 {project.description}
@@ -120,7 +137,8 @@ export default function WorkedProjects() {
                 Launch Project 
                 <ExternalLink className="w-4 h-4 ml-1" />
               </Link>
-            </motion.div>
+            </div>
+          </motion.div>
           ))}
         </motion.div>
       </div>
