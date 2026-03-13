@@ -22,6 +22,7 @@ import SmoothScroll from "@/providers/SmoothScroll";
 import PageTransition from "@/providers/PageTransition";
 import ParticleBackground from "@/components/ParticleBackground";
 import Navigation from "@/components/Navigation";
+import { ThemeProvider } from "@/providers/ThemeProvider";
 
 export default function RootLayout({
   children,
@@ -31,13 +32,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${lexend.variable} font-inter antialiased`}>
-        <SmoothScroll>
-          <ParticleBackground />
-          <Navigation />
-          <PageTransition>
-            {children}
-          </PageTransition>
-        </SmoothScroll>
+        <ThemeProvider>
+          <SmoothScroll>
+            <ParticleBackground />
+            <Navigation />
+            <PageTransition>
+              {children}
+            </PageTransition>
+          </SmoothScroll>
+        </ThemeProvider>
       </body>
     </html>
   );

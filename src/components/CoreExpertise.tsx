@@ -5,18 +5,18 @@ import { motion } from "framer-motion";
 
 const services = [
   {
-    title: "SDK Architecture & Design",
-    description: "Designing clean, intuitive API surfaces for reliable and scalable Android library consumption.",
+    title: "Mobile SDK Architecture",
+    description: "Designing clean, intuitive API surfaces and bridges for cross-platform (Flutter/RN) and native Android libraries.",
     icon: LayoutTemplate,
   },
   {
-    title: "Developer Experience (DX)",
-    description: "Creating comprehensive documentation, sample apps, and streamlined integration flows for external developers.",
+    title: "Full-Stack Business Systems",
+    description: "Engineering end-to-end solutions for local businesses, from real-time booking engines to complex financial ledgers.",
     icon: Code2,
   },
   {
-    title: "Performance Optimization",
-    description: "Deep dive into Android core vitals, memory management, and multi-threading for battery-efficient libraries.",
+    title: "Performance & Data Integrity",
+    description: "Deep dive into memory management and ACID-compliant local storage to ensure 100% data accuracy in flaky network conditions.",
     icon: Cpu,
   },
 ];

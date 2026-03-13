@@ -29,6 +29,9 @@ const itemVariants = {
 };
 
 export default function HeroSection() {
+  const titleText = "I build robust mobile experiences at scale.";
+  const titleCharacters = Array.from(titleText);
+
   return (
     <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden">
       <motion.div 
@@ -46,12 +49,47 @@ export default function HeroSection() {
             <span>Available for new opportunities</span>
           </motion.div>
           
-          <motion.h1 variants={itemVariants} className="text-5xl md:text-7xl font-bold text-navy tracking-tight leading-[1.1] mb-8">
-            I build robust mobile experiences at scale.
+          <motion.h1 
+            initial="hidden"
+            animate="visible"
+            className="text-5xl md:text-7xl font-bold text-navy tracking-tight leading-[1.1] mb-8 mix-blend-multiply flex flex-wrap"
+          >
+            {titleCharacters.map((char, index) => (
+              <motion.span
+                key={index}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{
+                  duration: 0.05,
+                  delay: index * 0.05,
+                  ease: "easeInOut",
+                }}
+              >
+                {char === " " ? "\u00A0" : char}
+              </motion.span>
+            ))}
+            <motion.span
+              key="cursor"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: [1, 0, 1] }}
+              transition={{ 
+                duration: 0.8, 
+                repeat: 3, 
+                repeatDelay: 0.1,
+                delay: titleCharacters.length * 0.05 + 0.1,
+                ease: "linear",
+              }}
+              className="inline-block w-[4px] h-[0.9em] bg-primary ml-1 align-middle"
+              style={{ opacity: 0 }}
+            />
           </motion.h1>
           
-          <motion.p variants={itemVariants} className="text-xl text-text-body mb-12 max-w-2xl leading-relaxed">
-            Hi, I&apos;m Megh. I&apos;m an Android SDK Engineer with 4 years of experience specializing in developer tools, system architecture, and performance optimization.
+          <motion.p 
+            variants={itemVariants} 
+            transition={{ delay: 1.0 }} // Reveal after title
+            className="text-xl text-text-body mb-12 max-w-2xl leading-relaxed"
+          >
+            Hi, I&apos;m Megh. I&apos;m a Mobile/Android SDK Engineer with 4 years of experience specializing in developer tools, system architecture, and performance optimization.
           </motion.p>
           
           <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-4">
@@ -66,7 +104,7 @@ export default function HeroSection() {
             </MagneticButton>
             <MagneticButton>
               <Link
-                href="https://github.com/meghlath"
+                href="https://github.com/megh-lath-1012"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-8 py-4 bg-white text-navy border border-gray-200 font-medium rounded-full hover:bg-gray-50 transition-colors w-full sm:w-auto text-center block"

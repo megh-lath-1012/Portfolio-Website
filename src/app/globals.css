@@ -1,28 +1,42 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: var(--font-lexend), sans-serif;
-  --color-background-primary: #FFFFFF;
-  --color-background-muted: #F3F4F6;
-  --color-primary: #FD853A;
-  --color-navy: #1D2939;
-  --color-text-body: #667085;
+@theme {
+  --font-lexend: var(--font-lexend);
+  --font-inter: var(--font-inter);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-navy: var(--navy);
+  --color-primary: var(--primary);
+  --color-text-body: var(--text-body);
+  --color-background-muted: var(--background-muted);
+  /* Map these to the names used in components */
+  --color-background-primary: var(--background); 
 }
 
 :root {
-  --background: #FFFFFF;
-  --foreground: #1D2939;
+  --background: #ffffff;
+  --foreground: #171717;
+  --navy: #0f172a;
+  --primary: #f97316;
+  --text-body: #4b5563;
+  --background-muted: #f8fafc;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.dark {
+  --background: #020617;
+  --foreground: #f8fafc;
+  --navy: #f8fafc;
+  --primary: #fb923c;
+  --text-body: #94a3b8;
+  --background-muted: #0f172a;
+}
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-lexend), sans-serif;
+  user-select: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }

@@ -1,7 +1,12 @@
+"use client";
+
 import Link from "next/link";
 import MagneticButton from "@/components/MagneticButton";
+import { Moon, Sun } from "lucide-react";
+import { useTheme } from "@/providers/ThemeProvider";
 
 export default function Navigation() {
+  const { theme, toggleTheme } = useTheme();
   return (
     <nav className="sticky top-0 z-50 w-full bg-background-primary/80 backdrop-blur-md border-b border-gray-100">
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
@@ -33,6 +38,19 @@ export default function Navigation() {
           >
             Contact
           </Link>
+          
+          <button
+            onClick={toggleTheme}
+            className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+            aria-label="Toggle Theme"
+          >
+            {theme === "light" ? (
+              <Moon className="w-5 h-5 text-navy" />
+            ) : (
+              <Sun className="w-5 h-5 text-navy" />
+            )}
+          </button>
+
           <MagneticButton>
             <Link
               href="#contact"
