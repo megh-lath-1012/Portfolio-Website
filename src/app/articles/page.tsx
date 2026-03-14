@@ -33,7 +33,23 @@ const itemVariants: Variants = {
 
 export default function ArticlesPage() {
   useEffect(() => {
+    // Force scroll to top on mount
     window.scrollTo(0, 0);
+    
+    // Some browsers or libraries (like Lenis) might need a small delay
+    // to override preserved scroll positions or transitions
+    const timer = setTimeout(() => {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'instant' as ScrollBehavior
+      });
+      // Also scroll the body/html just in case
+      document.documentElement.scrollTo(0, 0);
+      document.body.scrollTo(0, 0);
+    }, 100);
+
+    return () => clearTimeout(timer);
   }, []);
 
   return (
