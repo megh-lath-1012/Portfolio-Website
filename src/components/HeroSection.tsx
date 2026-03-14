@@ -1,8 +1,6 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
 import { motion, Variants } from "framer-motion";
 import ElasticBackground from "@/components/ElasticBackground";
 
@@ -32,7 +30,7 @@ const itemVariants: Variants = {
 export default function HeroSection() {
 
   return (
-    <section className="relative pt-16 pb-20 md:pt-24 md:pb-32 overflow-hidden">
+    <section className="relative pt-16 pb-10 md:pt-24 md:pb-16 overflow-hidden">
       <ElasticBackground />
       <motion.div 
         variants={containerVariants}
@@ -69,7 +67,7 @@ export default function HeroSection() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
               </span>
-              <span>Available for new opportunities</span>
+              <span>Accepting Project Inquiries for PixelPulse Services</span>
             </motion.div>
           </motion.div>
           
@@ -77,7 +75,7 @@ export default function HeroSection() {
             variants={itemVariants}
             className="text-5xl md:text-7xl font-bold tracking-tight leading-[1.1] mb-8 text-foreground dark:text-foreground"
           >
-            I build robust mobile experiences at scale.
+            Engineering High-Performance Mobile Ecosystems.
           </motion.h1>
           
           <motion.p 
@@ -85,27 +83,8 @@ export default function HeroSection() {
             transition={{ delay: 1.5 }}
             className="text-xl mb-12 max-w-2xl leading-relaxed text-text-body"
           >
-            Hi, I&apos;m Megh. I&apos;m a Mobile/Android SDK Engineer with 4 years of experience specializing in developer tools, system architecture, and performance optimization.
+            PixelPulse is a boutique engineering studio led by Megh Lath. With 4 years of experience, we specialize in building robust Android SDKs, Flutter applications, and full-stack business systems designed for industrial scale.
           </motion.p>
-          
-          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-4">
-            <Link
-              href="#work"
-              className="px-8 py-4 bg-navy text-white font-medium rounded-full hover:bg-gray-800 transition-colors flex items-center shadow-lg hover:shadow-xl w-full sm:w-auto justify-center dark:bg-primary dark:hover:bg-orange-600"
-            >
-              View My Work
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Link>
-            
-            <Link
-              href="https://github.com/megh-lath-1012"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-8 py-4 bg-background text-foreground border border-gray-300 font-medium rounded-full hover:bg-gray-100 hover:text-navy transition-colors w-full sm:w-auto text-center block dark:bg-transparent dark:text-foreground dark:border-gray-700 dark:hover:bg-gray-800 dark:hover:text-white"
-            >
-              GitHub Profile
-            </Link>
-          </motion.div>
         </div>
       </motion.div>
       

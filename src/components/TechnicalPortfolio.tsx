@@ -30,7 +30,7 @@ const cardVariants: Variants = {
 
 export default function TechnicalPortfolio() {
   return (
-    <section id="work" className="py-24 transition-colors duration-300">
+    <section id="work" className="py-10 md:py-16 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -41,7 +41,7 @@ export default function TechnicalPortfolio() {
         >
           <div className="max-w-2xl">
             <h2 className="text-4xl md:text-5xl font-bold text-navy mb-6">
-              Technical Portfolio
+              Case Studies
             </h2>
             <p className="text-xl text-text-body">
               A selection of SDKs, core libraries, and architectural components designed for scale and developer experience.

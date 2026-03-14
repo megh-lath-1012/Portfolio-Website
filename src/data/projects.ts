@@ -29,8 +29,8 @@ export interface Project {
 export const projects: Project[] = [
   {
     id: "appointment-booking",
-    title: "Pet Palace",
-    category: "Real-time Booking Service",
+    title: "Pet Palace (PixelPulse SaaS Solution)",
+    category: "Multi-tenant SaaS / Real-time Service",
     description: "A comprehensive management ecosystem for pet grooming businesses featuring real-time status tracking and automated customer notifications. Live at [pixelpulse.services](https://www.pixelpulse.services/)",
     longDescription: "A comprehensive real-time booking application for pet grooming businesses (Pet Palace). It allows shop owners to manage bookings, employees, and customers in real-time. Features include a dynamic booking flow, Twilio-powered SMS alerts, and deep behavioral tracking for pets.",
     tags: ["React", "Firebase", "Twilio", "Tailwind"],
@@ -94,7 +94,7 @@ export const projects: Project[] = [
   },
   {
     id: "outstanding-manager",
-    title: "Outstanding Manager App",
+    title: "Outstanding Manager (FinTech Utility)",
     category: "FinTech / Business Ledger",
     description: "High-precision financial ledger for local businesses to track credits, debits, and outstanding balances with a focus on data integrity.",
     longDescription: "A specialized financial management tool for local businesses to track credits, debits, and outstanding balances. It features a rapid AI-driven entry system and a precise FIFO (First-In-First-Out) payment allocation engine.",
@@ -162,9 +162,9 @@ await batch.commit();`
   },
   {
     id: "nami-sdk",
-    title: "Freelance SDK Engineering (Nami)",
+    title: "Senior SDK Engineering (Nami ML)",
     category: "System Architecture",
-    description: "Collaborating with a US-based startup on core mobile SDK development and performance-critical library modules.",
+    description: "Collaborating with a US-based AI startup on core mobile SDK development and performance-critical library modules.",
     longDescription: "Development of core mobile SDK modules, focusing on performance-critical components and cross-platform bridges to ensure seamless integration for third-party developers.",
     tags: ["Kotlin", "Android SDK", "Native Modules", "Cross-platform Bridges"],
     githubRepo: "namiml",
