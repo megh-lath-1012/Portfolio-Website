@@ -2,10 +2,11 @@
 
 import Link from "next/link";
 import { ArrowRight, BookOpen, ExternalLink } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { articles } from "@/data/articles";
+import Image from "next/image";
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -15,7 +16,7 @@ const containerVariants = {
   },
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { opacity: 0, y: 15 },
   visible: {
     opacity: 1,
@@ -23,7 +24,7 @@ const itemVariants = {
     transition: {
       duration: 0.5,
       ease: "easeOut",
-    } as any,
+    },
   },
 };
 
@@ -74,10 +75,11 @@ export default function ArticleList() {
                 {/* Image Container */}
                 <div className="relative h-48 w-full overflow-hidden bg-gray-100">
                   {article.coverImage ? (
-                    <img 
+                    <Image 
                       src={article.coverImage} 
                       alt={article.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center text-gray-400 bg-background-muted">

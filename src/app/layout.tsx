@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 
 import SmoothScroll from "@/providers/SmoothScroll";
 import PageTransition from "@/providers/PageTransition";
-import ElasticBackground from "@/components/ElasticBackground";
+// import ElasticBackground from "@/components/ElasticBackground";
 import Navigation from "@/components/Navigation";
 import { ThemeProvider } from "@/providers/ThemeProvider";
 
