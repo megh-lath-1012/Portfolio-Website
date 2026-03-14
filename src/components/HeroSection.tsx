@@ -87,31 +87,6 @@ export default function HeroSection() {
           >
             PixelPulse is a boutique engineering studio led by Megh Lath. With 4 years of experience, we specialize in building robust Android SDKs, Flutter applications, and full-stack business systems designed for industrial scale.
           </motion.p>
-          
-          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-4">
-            <Link
-              href="#expertise"
-              className="px-8 py-4 bg-navy text-white font-medium rounded-full hover:bg-gray-800 transition-colors flex items-center shadow-lg hover:shadow-xl w-full sm:w-auto justify-center dark:bg-primary dark:hover:bg-orange-600"
-            >
-              Services
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Link>
-            
-            <Link
-              href="#work"
-              onClick={(e) => {
-                const element = document.querySelector("#work");
-                if (element) {
-                  e.preventDefault();
-                  element.scrollIntoView({ behavior: "smooth" });
-                  window.history.pushState(null, "", "#work");
-                }
-              }}
-              className="px-8 py-4 bg-background text-foreground border border-gray-300 font-medium rounded-full hover:bg-gray-100 hover:text-navy transition-colors w-full sm:w-auto text-center block dark:bg-transparent dark:text-foreground dark:border-gray-700 dark:hover:bg-gray-800 dark:hover:text-white"
-            >
-              View Case Studies
-            </Link>
-          </motion.div>
         </div>
       </motion.div>
       
