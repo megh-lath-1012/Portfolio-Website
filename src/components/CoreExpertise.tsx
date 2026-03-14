@@ -5,18 +5,18 @@ import { motion, Variants } from "framer-motion";
 
 const services = [
   {
-    title: "Mobile SDK Architecture",
-    description: "Designing clean, intuitive API surfaces and bridges for cross-platform (Flutter/RN) and native Android libraries.",
+    title: "Custom SDK Development",
+    description: "Designing clean, intuitive API surfaces and bridges for native Android and cross-platform (Flutter/RN) libraries.",
     icon: LayoutTemplate,
   },
   {
-    title: "Full-Stack Business Systems",
-    description: "Engineering end-to-end solutions for local businesses, from real-time booking engines to complex financial ledgers.",
+    title: "Enterprise Mobility Solutions",
+    description: "End-to-end development of business-critical apps using Flutter and React Native, focused on performance and scale.",
     icon: Code2,
   },
   {
-    title: "Performance & Data Integrity",
-    description: "Deep dive into memory management and ACID-compliant local storage to ensure 100% data accuracy in flaky network conditions.",
+    title: "Technical Architecture Consulting",
+    description: "Deep-dive audits into memory management, data integrity (ACID compliance), and CI/CD automation for existing products.",
     icon: Cpu,
   },
 ];
@@ -55,10 +55,10 @@ export default function CoreExpertise() {
           className="mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-navy mb-6">
-            Core Expertise
+            Professional Services
           </h2>
           <p className="text-xl text-text-body max-w-2xl">
-            Bridging the gap between robust system architecture and seamless developer integration.
+            Delivering high-fidelity technical architecture and seamless mobile integration for local and global enterprises.
           </p>
         </motion.div>
 

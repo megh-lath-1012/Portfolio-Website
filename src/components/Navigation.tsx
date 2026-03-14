@@ -24,7 +24,7 @@ export default function Navigation() {
     <nav className="sticky top-0 z-50 w-full bg-background-primary/80 backdrop-blur-md border-b border-gray-100 dark:border-gray-800">
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         <Link href="/" className="text-xl font-bold tracking-tight text-navy">
-          Megh Lath
+          PixelPulse Services
         </Link>
         <div className="hidden md:flex items-center space-x-8">
           <Link

@@ -4,10 +4,10 @@ import { motion } from "framer-motion";
 
 const experiences = [
   {
-    role: "Senior Mobile SDK Lead",
-    company: "Nami ML",
+    role: "Founder & Principal Engineer",
+    company: "PixelPulse Services",
     period: "05/2025 - Present",
-    description: "Directed an AI-first implementation model, governing agentic AI workflows to audit and optimize complex SDK modules across Android and iOS.",
+    description: "Transitioned independent engineering operations into a registered Udyam technical service firm, directing mobile architecture and agentic AI workflows for complex SDK modules.",
     achievements: [
       "Led the development of modular SDK architecture using Kotlin and Jetpack Compose for enterprise-scale deployments.",
       "Oversaw platform parity between Android and iOS SDK functionalities, ensuring seamless logic synchronization.",
