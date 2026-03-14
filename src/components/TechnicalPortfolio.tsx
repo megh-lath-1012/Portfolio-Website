@@ -41,7 +41,7 @@ export default function TechnicalPortfolio() {
         >
           <div className="max-w-2xl">
             <h2 className="text-4xl md:text-5xl font-bold text-navy mb-6">
-              Technical Portfolio
+              Case Studies
             </h2>
             <p className="text-xl text-text-body">
               A selection of SDKs, core libraries, and architectural components designed for scale and developer experience.

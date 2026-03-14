@@ -14,8 +14,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Android SDK Engineer Portfolio",
-  description: "Senior Mobile Engineer Portfolio specializing in SDKs",
+  title: "PixelPulse Services | High-Performance Mobile Ecosystems",
+  description: "Engineering studio specialized in Android SDKs, Flutter applications, and full-stack business systems led by Megh Lath.",
 };
 
 import SmoothScroll from "@/providers/SmoothScroll";
