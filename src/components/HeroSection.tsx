@@ -1,8 +1,6 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
 import { motion, Variants } from "framer-motion";
 import ElasticBackground from "@/components/ElasticBackground";
 
