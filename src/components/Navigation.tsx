@@ -1,16 +1,20 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import MagneticButton from "@/components/MagneticButton";
-import { Moon, Sun } from "lucide-react";
+import { Moon, Sun, Menu, X } from "lucide-react";
 import { useTheme } from "@/providers/ThemeProvider";
 import { usePathname } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navigation() {
   const { theme, toggleTheme } = useTheme();
   const pathname = usePathname();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    setIsMenuOpen(false);
     if (href.startsWith("#") && pathname === "/") {
       const element = document.querySelector(href);
       if (element) {
@@ -20,41 +24,37 @@ export default function Navigation() {
       }
     }
   };
+
+  const navLinks = [
+    { name: "Work", href: "/#work" },
+    { name: "Articles", href: "/#articles" },
+    { name: "About", href: "/#about" },
+    { name: "Contact", href: "/#contact" },
+  ];
+
   return (
-    <nav className="sticky top-0 z-50 w-full bg-background-primary/80 backdrop-blur-md border-b border-gray-100 dark:border-gray-800">
+    <nav className="sticky top-0 z-50 w-full bg-background/80 backdrop-blur-md border-b border-gray-100 dark:border-gray-800">
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-        <Link href="/" className="text-xl font-bold tracking-tight text-navy">
+        <Link 
+          href="/" 
+          onClick={() => setIsMenuOpen(false)}
+          className="text-xl font-bold tracking-tight text-navy dark:text-white"
+        >
           PixelPulse Services
         </Link>
+
+        {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-8">
-          <Link
-            href="/#work"
-            onClick={(e) => handleLinkClick(e, "#work")}
-            className="text-sm font-medium text-text-body hover:text-navy transition-colors"
-          >
-            Work
-          </Link>
-          <Link
-            href="/#articles"
-            onClick={(e) => handleLinkClick(e, "#articles")}
-            className="text-sm font-medium text-text-body hover:text-navy transition-colors"
-          >
-            Articles
-          </Link>
-          <Link
-            href="/#about"
-            onClick={(e) => handleLinkClick(e, "#about")}
-            className="text-sm font-medium text-text-body hover:text-navy transition-colors"
-          >
-            About
-          </Link>
-          <Link
-            href="/#contact"
-            onClick={(e) => handleLinkClick(e, "#contact")}
-            className="text-sm font-medium text-text-body hover:text-navy transition-colors"
-          >
-            Contact
-          </Link>
+          {navLinks.map((link) => (
+            <Link
+              key={link.name}
+              href={link.href}
+              onClick={(e) => handleLinkClick(e, link.href.replace("/", ""))}
+              className="text-sm font-medium text-text-body hover:text-navy dark:hover:text-white transition-colors"
+            >
+              {link.name}
+            </Link>
+          ))}
           
           <button
             onClick={toggleTheme}
@@ -62,9 +62,9 @@ export default function Navigation() {
             aria-label="Toggle Theme"
           >
             {theme === "light" ? (
-              <Moon className="w-5 h-5 text-navy" />
+              <Moon className="w-5 h-5 text-navy dark:text-white" />
             ) : (
-              <Sun className="w-5 h-5 text-navy" />
+              <Sun className="w-5 h-5 text-navy dark:text-white" />
             )}
           </button>
 
@@ -78,7 +78,61 @@ export default function Navigation() {
             </Link>
           </MagneticButton>
         </div>
+
+        {/* Mobile Toggle & Theme */}
+        <div className="flex items-center space-x-4 md:hidden">
+          <button
+            onClick={toggleTheme}
+            className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+            aria-label="Toggle Theme"
+          >
+            {theme === "light" ? (
+              <Moon className="w-5 h-5 text-navy dark:text-white" />
+            ) : (
+              <Sun className="w-5 h-5 text-navy dark:text-white" />
+            )}
+          </button>
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors text-navy dark:text-white"
+            aria-label="Toggle Menu"
+          >
+            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
       </div>
+
+      {/* Mobile Navigation Menu */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden bg-background border-b border-gray-100 dark:border-gray-800 overflow-hidden"
+          >
+            <div className="flex flex-col space-y-4 px-6 py-8">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  onClick={(e) => handleLinkClick(e, link.href.replace("/", ""))}
+                  className="text-lg font-semibold text-text-body hover:text-navy dark:hover:text-white transition-colors"
+                >
+                  {link.name}
+                </Link>
+              ))}
+              <Link
+                href="/#contact"
+                onClick={(e) => handleLinkClick(e, "#contact")}
+                className="w-full py-4 bg-primary text-white text-center font-bold rounded-xl hover:bg-orange-600 transition-colors shadow-sm"
+              >
+                Let&apos;s Talk
+              </Link>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }

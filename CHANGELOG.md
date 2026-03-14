@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.2.0] - 2026-03-14
+### Added
+- **Mobile Navigation**: Implemented a responsive mobile menu with a sleek hamburger toggle and Framer Motion animations.
+- **Project Structure**: Added a comprehensive project directory overview to `README.md`.
+- **Tech Stack**: Documented the core technologies used in the studio portfolio.
+
+### Changed
+- **Mobile UX**: Refined the Hero Section's availability badge alignment; it now stacks vertically below the profile picture on mobile for better visual balance.
+- **README Overhaul**: Replaced the default Next.js template with a professional profile for PixelPulse Services.
+
 ## [1.1.0] - 2026-03-14
 
 ### Rebranding to PixelPulse Services
