@@ -1,23 +1,38 @@
 "use client";
 
-import { LayoutTemplate, Code2, Cpu } from "lucide-react";
+import { Smartphone, Puzzle, Cloud, Layers, Monitor } from "lucide-react";
 import { motion, Variants } from "framer-motion";
 
 const services = [
   {
-    title: "Custom SDK Development",
-    description: "Designing clean, intuitive API surfaces and bridges for native Android and cross-platform (Flutter/RN) libraries.",
-    icon: LayoutTemplate,
+    title: "Mobile App Development",
+    description: "Building high-performance, native applications with a focus on Clean Architecture, offline-first functionality, and seamless UX.",
+    icon: Smartphone,
+    tag: null
   },
   {
-    title: "Enterprise Mobility Solutions",
-    description: "End-to-end development of business-critical apps using Flutter and React Native, focused on performance and scale.",
-    icon: Code2,
+    title: "SDK & Library Development",
+    description: "Designing robust, scalable SDKs for third-party integration, prioritizing modularity, clear documentation, and developer experience.",
+    icon: Puzzle,
+    tag: "SDK"
   },
   {
-    title: "Technical Architecture Consulting",
-    description: "Deep-dive audits into memory management, data integrity (ACID compliance), and CI/CD automation for existing products.",
-    icon: Cpu,
+    title: "SaaS Development",
+    description: "Engineering end-to-end cloud-based solutions, including user management, scalable backend integration, and subscription workflows.",
+    icon: Cloud,
+    tag: "SaaS"
+  },
+  {
+    title: "Cross-Platform Solutions",
+    description: "Leveraging Flutter and React Native to deliver consistent, high-quality experiences across iOS and Android from a single codebase.",
+    icon: Layers,
+    tag: null
+  },
+  {
+    title: "Web Development",
+    description: "Creating responsive, modern web dashboards and SEO-optimized platforms to complement mobile ecosystems.",
+    icon: Monitor,
+    tag: null
   },
 ];
 
@@ -55,9 +70,12 @@ export default function CoreExpertise() {
           className="mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-navy mb-6">
-            Professional Services
+            Services
           </h2>
-          <p className="text-xl text-text-body max-w-2xl">
+          <p className="text-xl text-text-body max-w-2xl font-semibold text-primary mb-2">
+            Expertise & Solutions
+          </p>
+          <p className="text-lg text-text-body max-w-2xl">
             Delivering high-fidelity technical architecture and seamless mobile integration for local and global enterprises.
           </p>
         </motion.div>
@@ -67,22 +85,29 @@ export default function CoreExpertise() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
           {services.map((service, index) => (
             <motion.div
               key={index}
               variants={cardVariants}
               whileHover={{ y: -5 }}
-              className="bg-background p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 hover:shadow-md transition-all group"
+              className="bg-background p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 hover:shadow-md transition-all group relative flex flex-col"
             >
               <div className="w-14 h-14 bg-orange-50 dark:bg-orange-900/20 rounded-xl flex items-center justify-center mb-8 group-hover:bg-primary transition-colors">
                 <service.icon className="w-7 h-7 text-primary group-hover:text-white transition-colors" />
               </div>
-              <h3 className="text-2xl font-semibold text-navy mb-4">
-                {service.title}
-              </h3>
-              <p className="text-text-body leading-relaxed">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-2xl font-semibold text-navy">
+                  {service.title}
+                </h3>
+                {service.tag && (
+                  <span className="px-2 py-1 bg-primary/10 text-primary text-[10px] font-bold rounded uppercase tracking-wider">
+                    {service.tag}
+                  </span>
+                )}
+              </div>
+              <p className="text-text-body leading-relaxed flex-grow">
                 {service.description}
               </p>
             </motion.div>

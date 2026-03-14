@@ -93,7 +93,7 @@ export default function HeroSection() {
               href="#expertise"
               className="px-8 py-4 bg-navy text-white font-medium rounded-full hover:bg-gray-800 transition-colors flex items-center shadow-lg hover:shadow-xl w-full sm:w-auto justify-center dark:bg-primary dark:hover:bg-orange-600"
             >
-              Our Services
+              Services
               <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
             
