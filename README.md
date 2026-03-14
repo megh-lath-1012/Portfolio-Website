@@ -1,3 +1,5 @@
+![PixelPulse Services Cover](./public/readme-cover.png)
+
 # PixelPulse Services Portfolio
 
 **PixelPulse Services** is a boutique engineering studio led by **Megh Lath**. We specialize in engineering high-performance mobile ecosystems, robust Android SDKs, and full-stack business systems designed for industrial scale.
