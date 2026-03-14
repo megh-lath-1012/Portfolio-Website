@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, BookOpen, ExternalLink } from "lucide-react";
+import { ArrowRight, BookOpen } from "lucide-react";
 import { motion, Variants } from "framer-motion";
 import { articles } from "@/data/articles";
 import Image from "next/image";
@@ -49,13 +49,6 @@ export default function ArticleList() {
               Insights on Android architecture, performance optimization, and premium UI patterns in Jetpack Compose.
             </p>
           </div>
-          <Link
-            href="https://canopas.com/author/megh-l"
-            target="_blank"
-            className="hidden md:inline-flex items-center text-primary font-semibold hover:text-orange-600 transition-colors mt-6 md:mt-0"
-          >
-            Read more on Canopas <ExternalLink className="ml-1 w-5 h-5" />
-          </Link>
         </motion.div>
 
         <motion.div 
@@ -132,15 +125,6 @@ export default function ArticleList() {
           </div>
         )}
 
-        <div className="mt-8 md:hidden">
-          <Link
-            href="https://canopas.com/author/megh-l"
-            target="_blank"
-            className="inline-flex items-center justify-center w-full px-6 py-3 border border-gray-200 rounded-full text-navy font-semibold hover:bg-gray-50 transition-colors"
-          >
-            Read more on Canopas <ArrowRight className="ml-2 w-5 h-5" />
-          </Link>
-        </div>
       </div>
     </section>
   );

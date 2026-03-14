@@ -1,7 +1,10 @@
 "use client";
 
+import { useEffect } from "react";
+import { useLenis } from "lenis/react";
+
 import Link from "next/link";
-import { ArrowLeft, BookOpen, ExternalLink, ArrowRight } from "lucide-react";
+import { ArrowLeft, BookOpen, ArrowRight } from "lucide-react";
 import { motion, Variants } from "framer-motion";
 import { articles } from "@/data/articles";
 // import Navigation from "@/components/Navigation";
@@ -30,9 +33,31 @@ const itemVariants: Variants = {
 };
 
 export default function ArticlesPage() {
+  const lenis = useLenis();
+
+  useEffect(() => {
+    // Standard window reset
+    window.scrollTo(0, 0);
+    
+    // Reset Lenis if available
+    if (lenis) {
+      lenis.scrollTo(0, { immediate: true });
+    }
+
+    // Backup reset with delay
+    const timer = setTimeout(() => {
+      window.scrollTo(0, 0);
+      if (lenis) {
+        lenis.scrollTo(0, { immediate: true });
+      }
+    }, 50);
+
+    return () => clearTimeout(timer);
+  }, [lenis]);
+
   return (
-    <main className="min-h-screen bg-background flex flex-col">
-      <div className="pt-24 pb-12 bg-background-muted">
+    <main className="min-h-screen bg-background flex flex-col dark:bg-background-primary transition-colors duration-300">
+      <div className="pt-24 pb-12 bg-background-muted dark:bg-background-muted/10 border-b border-gray-100 dark:border-gray-800">
         <div className="max-w-7xl mx-auto px-6">
           <Link 
             href="/#articles" 
@@ -42,18 +67,11 @@ export default function ArticlesPage() {
           </Link>
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
             <div>
-              <h1 className="text-5xl font-bold text-navy mb-4">All Technical Articles</h1>
+              <h1 className="text-5xl font-bold text-navy dark:text-white mb-4">All Technical Articles</h1>
               <p className="text-xl text-text-body max-w-2xl">
                 A collection of deep dives into Android engineering, SDK architecture, and high-performance mobile systems.
               </p>
             </div>
-            <Link
-              href="https://canopas.com/author/megh-l"
-              target="_blank"
-              className="inline-flex items-center px-6 py-3 bg-white border border-gray-200 rounded-full text-navy font-semibold hover:bg-gray-50 transition-all shadow-sm"
-            >
-              Follow on Canopas <ExternalLink className="ml-2 w-4 h-4" />
-            </Link>
           </div>
         </div>
       </div>
@@ -71,9 +89,9 @@ export default function ArticlesPage() {
                 <Link
                   href={article.link}
                   target="_blank"
-                  className="group flex flex-col h-full bg-white rounded-2xl border border-gray-100 hover:border-primary/30 shadow-sm hover:shadow-xl transition-all overflow-hidden"
+                  className="group flex flex-col h-full bg-white dark:bg-background-muted rounded-2xl border border-gray-100 dark:border-gray-800 hover:border-primary/30 shadow-sm hover:shadow-xl transition-all overflow-hidden"
                 >
-                  <div className="relative h-48 w-full overflow-hidden bg-gray-100">
+                  <div className="relative h-48 w-full overflow-hidden bg-gray-100 dark:bg-gray-800">
                     {article.coverImage ? (
                       <Image 
                         src={article.coverImage} 
@@ -82,12 +100,12 @@ export default function ArticlesPage() {
                         className="object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center text-gray-400 bg-gray-50">
+                      <div className="w-full h-full flex items-center justify-center text-gray-400 bg-gray-50 dark:bg-gray-900">
                         <BookOpen className="w-12 h-12" />
                       </div>
                     )}
                     <div className="absolute top-4 left-4">
-                      <span className="px-3 py-1 bg-white/90 backdrop-blur-sm text-primary text-xs font-bold rounded-full shadow-sm">
+                      <span className="px-3 py-1 bg-white/90 dark:bg-background-muted/90 backdrop-blur-sm text-primary text-xs font-bold rounded-full shadow-sm">
                         {article.category}
                       </span>
                     </div>
@@ -103,7 +121,7 @@ export default function ArticlesPage() {
                       </span>
                     </div>
                     
-                    <h3 className="text-xl font-bold text-navy mb-3 group-hover:text-primary transition-colors line-clamp-2">
+                    <h3 className="text-xl font-bold text-navy dark:text-white mb-3 group-hover:text-primary transition-colors line-clamp-2">
                       {article.title}
                     </h3>
                     
