@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { useLenis } from "lenis/react";
 
 import Link from "next/link";
 import { ArrowLeft, BookOpen, ExternalLink, ArrowRight } from "lucide-react";
@@ -32,25 +33,27 @@ const itemVariants: Variants = {
 };
 
 export default function ArticlesPage() {
+  const lenis = useLenis();
+
   useEffect(() => {
-    // Force scroll to top on mount
+    // Standard window reset
     window.scrollTo(0, 0);
     
-    // Some browsers or libraries (like Lenis) might need a small delay
-    // to override preserved scroll positions or transitions
+    // Reset Lenis if available
+    if (lenis) {
+      lenis.scrollTo(0, { immediate: true });
+    }
+
+    // Backup reset with delay
     const timer = setTimeout(() => {
-      window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: 'instant' as ScrollBehavior
-      });
-      // Also scroll the body/html just in case
-      document.documentElement.scrollTo(0, 0);
-      document.body.scrollTo(0, 0);
-    }, 100);
+      window.scrollTo(0, 0);
+      if (lenis) {
+        lenis.scrollTo(0, { immediate: true });
+      }
+    }, 50);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [lenis]);
 
   return (
     <main className="min-h-screen bg-background flex flex-col dark:bg-background-primary transition-colors duration-300">
