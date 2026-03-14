@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useLenis } from "lenis/react";
 
 import Link from "next/link";
-import { ArrowLeft, BookOpen, ExternalLink, ArrowRight } from "lucide-react";
+import { ArrowLeft, BookOpen, ArrowRight } from "lucide-react";
 import { motion, Variants } from "framer-motion";
 import { articles } from "@/data/articles";
 // import Navigation from "@/components/Navigation";

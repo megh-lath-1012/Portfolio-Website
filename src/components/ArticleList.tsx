@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, BookOpen, ExternalLink } from "lucide-react";
+import { ArrowRight, BookOpen } from "lucide-react";
 import { motion, Variants } from "framer-motion";
 import { articles } from "@/data/articles";
 import Image from "next/image";
