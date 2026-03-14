@@ -41,7 +41,7 @@ export default function HeroSection() {
         <div className="max-w-3xl">
           <motion.div 
             variants={itemVariants}
-            className="mb-12 flex items-end gap-6"
+            className="mb-12 flex flex-col items-start md:flex-row md:items-end gap-4 md:gap-6"
           >
             <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-2 border-primary/20 p-1.5 bg-background shadow-xl scale-100 hover:scale-105 transition-transform duration-500 flex-shrink-0">
               <div className="relative w-full h-full rounded-full overflow-hidden">
@@ -56,12 +56,12 @@ export default function HeroSection() {
               <div className="absolute inset-0 rounded-full border border-primary/10 pointer-events-none" />
             </div>
 
-            {/* Availability Badge next to image */}
+            {/* Availability Badge next to image (desktop) / below image (mobile) */}
             <motion.div 
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.8, duration: 0.5 }}
-              className="flex items-center space-x-2 px-3 py-1.5 rounded-full bg-white dark:bg-gray-900 border border-orange-100 dark:border-orange-900/30 shadow-lg text-primary text-xs font-semibold whitespace-nowrap mb-2"
+              className="flex items-center space-x-2 px-3 py-1.5 rounded-full bg-white dark:bg-gray-900 border border-orange-100 dark:border-orange-900/30 shadow-lg text-primary text-xs font-semibold whitespace-nowrap mb-0 md:mb-2"
             >
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
