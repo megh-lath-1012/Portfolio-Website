@@ -1,7 +1,6 @@
 import HeroSection from "@/components/HeroSection";
 import CoreExpertise from "@/components/CoreExpertise";
 import TechnicalPortfolio from "@/components/TechnicalPortfolio";
-import WorkedProjects from "@/components/WorkedProjects";
 import CareerPath from "@/components/CareerPath";
 import ArticleList from "@/components/ArticleList";
 import Footer from "@/components/Footer";
@@ -12,7 +11,6 @@ export default function Home() {
       <HeroSection />
       <CoreExpertise />
       <TechnicalPortfolio />
-      <WorkedProjects />
       <CareerPath />
       <ArticleList />
       <Footer />
