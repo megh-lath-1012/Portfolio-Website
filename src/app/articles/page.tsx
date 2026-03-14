@@ -72,13 +72,6 @@ export default function ArticlesPage() {
                 A collection of deep dives into Android engineering, SDK architecture, and high-performance mobile systems.
               </p>
             </div>
-            <Link
-              href="https://canopas.com/author/megh-l"
-              target="_blank"
-              className="inline-flex items-center px-6 py-3 bg-white dark:bg-background-muted border border-gray-200 dark:border-gray-700 rounded-full text-navy dark:text-white font-semibold hover:bg-gray-50 dark:hover:bg-gray-800 transition-all shadow-sm"
-            >
-              Follow on Canopas <ExternalLink className="ml-2 w-4 h-4" />
-            </Link>
           </div>
         </div>
       </div>
