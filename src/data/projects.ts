@@ -23,6 +23,7 @@ export interface Project {
   };
   keyFeatures: string[];
   technicalChallenges?: TechnicalChallenge[];
+  image?: string;
 }
 
 export const projects: Project[] = [
@@ -35,6 +36,7 @@ export const projects: Project[] = [
     tags: ["React", "Firebase", "Twilio", "Tailwind"],
     githubRepo: "megh-lath-1012/Appointmentbookingapp",
     bgColor: "bg-rose-50",
+    image: "/projects/petpalace.png",
     techSpecs: {
       language: "TypeScript",
       architecture: "Serverless / Multi-tenant",
@@ -99,6 +101,7 @@ export const projects: Project[] = [
     tags: ["Flutter", "Riverpod", "Firebase", "Cloud Functions"],
     githubRepo: "megh-lath-1012/Outstanding-Manager",
     bgColor: "bg-amber-50",
+    image: "/projects/manager.png",
     techSpecs: {
       language: "Dart",
       architecture: "Repository Pattern / Clean UI",
@@ -166,6 +169,7 @@ await batch.commit();`
     tags: ["Kotlin", "Android SDK", "Native Modules", "Cross-platform Bridges"],
     githubRepo: "namiml",
     bgColor: "bg-blue-50",
+    image: "/projects/namisdk.png",
     techSpecs: {
       language: "Kotlin",
       architecture: "Native SDK Modules",
@@ -177,6 +181,98 @@ await batch.commit();`
       "Seamless cross-platform integration",
       "Performance-critical library components",
       "Reactive SDK design patterns",
+    ],
+  },
+  {
+    id: "justly",
+    title: "Justly",
+    category: "Product Development",
+    description: "A premium habit-tracking and self-improvement platform. Transitioned from native Android to Flutter for cross-platform scale.",
+    longDescription: "Justly is a holistic self-improvement app that helps users build consistent habits. I led the transition from native Android to Flutter, optimizing performance and integrating advanced analytics.",
+    tags: ["Flutter", "Jetpack Compose", "MixPanel", "A/B Testing"],
+    githubRepo: "canopas/justly",
+    bgColor: "bg-emerald-50",
+    image: "/projects/justly.png",
+    techSpecs: {
+      language: "Dart/Kotlin",
+      architecture: "Clean Architecture",
+      keyLibrary: "MixPanel Analytics",
+      platform: "Android / iOS",
+    },
+    keyFeatures: [
+      "AI-driven habit suggestions",
+      "Advanced A/B testing integration",
+      "MixPanel behavioral analytics",
+      "Seamless habit visualization",
+    ],
+  },
+  {
+    id: "grouptrack",
+    title: "GroupTrack",
+    category: "Location Intelligence",
+    description: "Real-time location sharing and safety platform for families and groups, utilizing advanced geofencing and maps SDKs.",
+    longDescription: "GroupTrack is a high-precision location tracking app. I architected the core tracking engine using Google Maps SDK and Firebase to ensure low-latency updates with minimal battery drain.",
+    tags: ["Google Maps SDK", "Firebase", "Firestore", "Geofencing"],
+    githubRepo: "canopas/grouptrack",
+    bgColor: "bg-indigo-50",
+    image: "/projects/grouptrack.png",
+    techSpecs: {
+      language: "Kotlin",
+      architecture: "Reactive / Real-time",
+      keyLibrary: "Google Maps SDK",
+      platform: "Android",
+    },
+    keyFeatures: [
+      "Real-time location sharing",
+      "Intelligent geofence alerts",
+      "Battery-optimized tracking",
+      "Family safety protocols",
+    ],
+  },
+  {
+    id: "triple-os",
+    title: "Triple O's",
+    category: "QSR / E-commerce",
+    description: "Mobile ordering platform for a major burger chain, optimized for lightning-fast checkout and reliable background processing.",
+    longDescription: "For Triple O's, I focused on resolving complex background permission issues and optimizing the checkout flow to ensure a friction-less ordering experience.",
+    tags: ["Android Native", "Background Tasks", "Play Store Compliance"],
+    githubRepo: "canopas/triple-os",
+    bgColor: "bg-red-50",
+    image: "/projects/tripleos.png",
+    techSpecs: {
+      language: "Java/Kotlin",
+      architecture: "Legacy Refactor",
+      keyLibrary: "WorkManager",
+      platform: "Android",
+    },
+    keyFeatures: [
+      "Seamless mobile ordering",
+      "Background status synchronization",
+      "Optimized checkout flow",
+      "Play Store compliant tasking",
+    ],
+  },
+  {
+    id: "rich-editor",
+    title: "Rich Editor",
+    category: "Open Source / SDK",
+    description: "A comprehensive WYSIWYG editor for Jetpack Compose, enabling rich text formatting with a focus on UX parity.",
+    longDescription: "Rich Editor is an open-source library I developed to bring robust rich text editing to Jetpack Compose, mirroring the UX fluidly across platforms.",
+    tags: ["Jetpack Compose", "Open Source", "UI/UX", "Kotlin"],
+    githubRepo: "canopas/rich-editor-compose",
+    bgColor: "bg-purple-50",
+    image: "/projects/richeditor.png",
+    techSpecs: {
+      language: "Kotlin",
+      architecture: "Declarative UI",
+      keyLibrary: "Jetpack Compose",
+      platform: "Android / Compose Multiplatform",
+    },
+    keyFeatures: [
+      "Declarative rich text state",
+      "Cross-platform UX parity",
+      "Performant span processing",
+      "Open-source contribution",
     ],
   }
 ];
