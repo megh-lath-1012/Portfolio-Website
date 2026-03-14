@@ -23,7 +23,10 @@
   - Updated current role to "Founder & Principal Engineer | PixelPulse Services".
   - Refined role description to reflect operational leadership.
 - **Footer**: 
-  - Updated email to `hello@pixelpulse.services`.
+  - Updated primary email to `hello@pixelpulse.services`.
+  - Added `meghlath09@gmail.com` as a secondary email.
   - Added Udyam registration legal note.
   - Updated copyright to "PixelPulse Services".
-- **Metadata**: Updated site title and metadata for SEO and branding consistency.
+- **Metadata & Layout**: 
+  - Updated site title and metadata for SEO.
+  - Unified section spacing across the home page (`py-10 md:py-16`) for a cleaner, more compact look.

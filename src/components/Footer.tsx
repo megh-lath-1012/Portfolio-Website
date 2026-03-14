@@ -33,6 +33,7 @@ export default function Footer() {
             </div>
             <div className="text-right">
               <p className="text-navy font-bold text-lg">hello@pixelpulse.services</p>
+              <p className="text-navy font-bold text-md opacity-80 mt-1">meghlath09@gmail.com</p>
               <p className="text-gray-500 text-sm mt-1">Surat, Gujarat, India (Serving Globally)</p>
               <p className="text-primary text-xs font-bold mt-2">PixelPulse is a registered Udyam enterprise.</p>
             </div>

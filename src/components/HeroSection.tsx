@@ -30,7 +30,7 @@ const itemVariants: Variants = {
 export default function HeroSection() {
 
   return (
-    <section className="relative pt-16 pb-20 md:pt-24 md:pb-32 overflow-hidden">
+    <section className="relative pt-16 pb-10 md:pt-24 md:pb-16 overflow-hidden">
       <ElasticBackground />
       <motion.div 
         variants={containerVariants}

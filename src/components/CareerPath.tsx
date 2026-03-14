@@ -39,7 +39,7 @@ const experiences = [
 
 export default function CareerPath() {
   return (
-    <section id="about" className="py-24 overflow-hidden">
+    <section id="about" className="py-10 md:py-16 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}

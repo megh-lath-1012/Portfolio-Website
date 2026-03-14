@@ -60,7 +60,7 @@ const cardVariants: Variants = {
 
 export default function CoreExpertise() {
   return (
-    <section id="expertise" className="py-24 overflow-hidden">
+    <section id="expertise" className="py-10 md:py-16 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div 
           initial={{ opacity: 0, x: -20 }}
