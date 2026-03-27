@@ -7,18 +7,28 @@ import { Moon, Sun, Menu, X } from "lucide-react";
 import { useTheme } from "@/providers/ThemeProvider";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLenis } from "lenis/react";
 
 export default function Navigation() {
   const { theme, toggleTheme } = useTheme();
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const lenis = useLenis();
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     setIsMenuOpen(false);
+    
     if (href.startsWith("#") && pathname === "/") {
+      e.preventDefault();
       const element = document.querySelector(href);
-      if (element) {
-        e.preventDefault();
+      if (element && lenis) {
+        lenis.scrollTo(element as HTMLElement, { 
+          offset: -80, // Account for sticky header height
+          duration: 1.5,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+        });
+        window.history.pushState(null, "", href);
+      } else if (element) {
         element.scrollIntoView({ behavior: "smooth" });
         window.history.pushState(null, "", href);
       }
@@ -38,7 +48,7 @@ export default function Navigation() {
         <Link 
           href="/" 
           onClick={() => setIsMenuOpen(false)}
-          className="text-xl font-bold tracking-tight text-navy dark:text-white"
+          className="text-xl font-bold tracking-tight text-navy dark:text-white transition-colors"
         >
           PixelPulse Services
         </Link>
